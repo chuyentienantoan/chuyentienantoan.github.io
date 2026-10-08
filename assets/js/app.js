@@ -107,6 +107,39 @@ const next = document.getElementById('next-image');
 const zoom = document.getElementById('zoom-image');
 let currentGroup = 'posters', currentIndex = 0, opener = null;
 let isTurning = false, turnToken = 0, pageAnimation = null, pageLoadTimer = null, swipeStart = null;
+let neighborTimer = null;
+const viewerImageCache = new Map();
+function loadViewerImage(src) {
+  if (viewerImageCache.has(src)) {
+    const cached = viewerImageCache.get(src);
+    viewerImageCache.delete(src); viewerImageCache.set(src,cached);
+    return cached;
+  }
+  const asset = new Image();
+  const request = new Promise((resolve,reject) => {
+    asset.onload = resolve; asset.onerror = () => reject(new Error('image-load')); asset.src = src;
+  }).then(async () => {
+    if (typeof asset.decode === 'function') await asset.decode();
+    return asset;
+  });
+  viewerImageCache.set(src,request);
+  while (viewerImageCache.size > 3) viewerImageCache.delete(viewerImageCache.keys().next().value);
+  request.catch(() => { if (viewerImageCache.get(src) === request) viewerImageCache.delete(src); });
+  return request;
+}
+function queueNextPage() {
+  clearTimeout(neighborTimer);
+  const connection = navigator.connection;
+  if (!dialog.open || isTurning || !image.complete || !image.naturalWidth) return;
+  if (connection && (connection.saveData || ['slow-2g','2g'].includes(connection.effectiveType))) return;
+  const item = media[currentGroup][currentIndex+1];
+  if (!item) return;
+  const token = turnToken;
+  neighborTimer = setTimeout(() => {
+    if (dialog.open && !isTurning && token === turnToken) loadViewerImage(item.image).catch(() => {});
+  }, 300);
+}
+image.addEventListener('load', queueNextPage);
 const pageMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const normalViewerHint = 'Vuốt trái để xem trang sau, vuốt phải để xem trang trước. Chọn “Phóng to” để đọc chi tiết.';
 function setViewerHint(message) {
@@ -122,6 +155,7 @@ function cancelPageTurn() {
   turnToken++; isTurning = false; swipeStart = null;
   if (pageAnimation) pageAnimation.cancel();
   pageAnimation = null; clearTimeout(pageLoadTimer);
+  clearTimeout(neighborTimer);
   imageContainer.classList.remove('is-loading', 'page-error');
   imageContainer.removeAttribute('aria-busy'); updatePageButtons();
 }
@@ -144,12 +178,7 @@ async function changePage(direction) {
   pageLoadTimer = setTimeout(() => { if (token === turnToken) imageContainer.classList.add('is-loading'); }, 180);
   try {
     // Keep the current page visible until the requested artwork is ready.
-    const readyImage = new Image();
-    await new Promise((resolve,reject) => {
-      readyImage.onload = resolve; readyImage.onerror = () => reject(new Error('image-load'));
-      readyImage.src = media[currentGroup][target].image;
-    });
-    if (typeof readyImage.decode === 'function') await readyImage.decode();
+    await loadViewerImage(media[currentGroup][target].image);
     if (token !== turnToken || !dialog.open) return;
     clearTimeout(pageLoadTimer); imageContainer.classList.remove('is-loading');
     imageContainer.classList.remove('zoomed');
@@ -173,6 +202,7 @@ async function changePage(direction) {
     if (token === turnToken) {
       clearTimeout(pageLoadTimer); imageContainer.classList.remove('is-loading');
       imageContainer.removeAttribute('aria-busy'); isTurning = false; updatePageButtons();
+      queueNextPage();
       if (restoreControlFocus && dialog.open && (document.activeElement === document.body || document.activeElement === focusedControl)) {
         const control = focusedControl.disabled ? (focusedControl === previous ? next : previous) : focusedControl;
         control.focus({preventScroll:true});
@@ -205,6 +235,7 @@ document.querySelectorAll('[data-view]').forEach(link => link.addEventListener('
   cancelPageTurn();
   currentGroup = link.dataset.view; currentIndex = Number(link.dataset.index); opener = link;
   renderImage(); dialog.showModal(); document.body.classList.add('modal-open');
+  queueNextPage();
   document.getElementById('close-viewer').focus();
 }));
 document.getElementById('close-viewer').addEventListener('click', () => dialog.close());
