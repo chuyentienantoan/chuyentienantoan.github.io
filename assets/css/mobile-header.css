@@ -1,0 +1,28 @@
+.hero h1 .hero-title-line{display:block}
+.hero h1 .hero-title-line:first-child{color:var(--ink)}
+@media(max-width:800px),(max-width:1000px) and (hover:none) and (pointer:coarse){
+  .site-header .header-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 8px;min-height:0;padding-block:10px}
+  .site-header .brand{grid-column:1;grid-row:1;gap:7px;font-size:clamp(13px,3.8vw,16px);line-height:1.45}
+  .site-header .brand-icon{display:grid;flex:0 0 32px;width:32px;height:38px;font-size:24px}
+  .site-header .brand-sub{font-size:clamp(12px,3.5vw,14px);line-height:1.45;margin-top:3px}
+  .site-header .font-toggle{grid-column:2;grid-row:1;min-height:48px;padding:8px 10px;font-size:.8rem}
+  .site-header nav{grid-column:1/-1;grid-row:2;display:flex;flex-wrap:nowrap;gap:14px;justify-content:center;width:auto;padding-top:3px;border-top:1px solid var(--line)}
+  .site-header nav a{font-size:clamp(14px,4.2vw,17px);white-space:nowrap;min-height:48px}
+  .large-text .site-header .brand{font-size:clamp(14px,4vw,18px)}
+  .large-text .site-header .brand-sub{font-size:clamp(13px,3.7vw,16px)}
+  .large-text .site-header nav a{font-size:clamp(15px,4.5vw,19px)}
+  .site-header.is-compact .header-inner{padding-block:5px;gap:0 8px}
+  .site-header.is-compact .brand{display:none}
+  .site-header.is-compact nav{grid-column:1;grid-row:1;border:0;padding:0;gap:8px}
+  .site-header.is-compact nav a{font-size:clamp(12.5px,3.65vw,15px)}
+  .large-text .site-header.is-compact nav a{font-size:clamp(14px,3.9vw,17px)}
+  .site-header.is-compact .font-toggle{width:48px;min-width:48px;padding:8px;gap:0;justify-content:center}
+  .site-header.is-compact .font-toggle span:last-child{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  html{scroll-padding-top:76px}
+  .poster-card{scroll-margin-top:84px}
+}
+@media(max-width:800px),(max-width:1000px) and (hover:none) and (pointer:coarse){
+  .hero h1{font-size:clamp(20px,7.2vw,34px);line-height:1.4;letter-spacing:-.015em}
+  .large-text .hero h1{font-size:clamp(22px,7.6vw,36px)}
+  .hero h1 .hero-title-line{white-space:nowrap}
+}

@@ -22,6 +22,7 @@ Nếu dùng repository có nội dung sẵn, có thể đặt bộ website trong
 - 7 nhóm thủ đoạn, 10 áp phích số 1, 2, 3, 4, 6, 7, 8, 9, 15, 16 và cẩm nang 10 trang.
 - Ảnh và PDF lấy từ bản watermark 2% đã có; không chèn thêm watermark lần nữa. Cả 10 áp phích xem trên trang dùng bố cục A3, bản xem WebP rộng 1.800 px, nén chất lượng cao để tải nhanh. Cẩm nang giữ độ rộng 1.080 px và được nén nhẹ. PNG A3 và PDF tải về giữ nguyên dung lượng, độ phân giải và dữ liệu của bản gốc.
 - Trình xem lưu tạm tối đa 3 ảnh gần nhất và tải trước một trang tiếp theo khi rảnh để vuốt nhanh hơn. Không tải trước tệp download; không tải cả bộ ảnh cùng lúc. Chế độ tiết kiệm dữ liệu/mạng 2G tắt việc tải trước.
+- Trên điện thoại, logo hiện ở đầu trang cả khi dùng chữ lớn. Khi cuộn xuống, phần tên đơn vị tự ẩn để thanh đầu trang gọn còn khoảng 59 px; về đầu trang sẽ hiện lại. Hai câu tiêu đề chính nằm trên hai dòng, mỗi câu một dòng.
 - Font Noto Sans hỗ trợ tiếng Việt được nhúng sẵn trong `assets/fonts`, kèm giấy phép OFL. Không tải font từ dịch vụ bên ngoài khi xem trang. [Nguồn font chính thức](https://github.com/google/fonts/tree/main/ofl/notosans).
 - Khi mở tài liệu, toàn bộ trang tự vừa khung theo cả chiều cao và chiều rộng, không cần cuộn. Chế độ phóng to mới cần cuộn để đọc chi tiết; chọn **Vừa màn hình** để trở lại.
 - Popup có tiêu đề gọn một dòng. Trên điện thoại, các nút chuyển trang, phóng to và tải nằm ở thanh dưới; trên màn hình rộng, các nút gộp vào một thanh trên để dành thêm chỗ cho tài liệu.

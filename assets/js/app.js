@@ -62,10 +62,30 @@ const startMoneyIntro = () => requestAnimationFrame(() => requestAnimationFrame(
 if (document.readyState === 'complete') startMoneyIntro();
 else window.addEventListener('load', startMoneyIntro, {once:true});
 const fontButton = document.querySelector('.font-toggle');
+// Collapse only the identity row on small screens; keep navigation reachable.
+const siteHeader = document.querySelector('.site-header');
+const mobileHeaderMedia = window.matchMedia('(max-width:800px), (max-width:1000px) and (hover:none) and (pointer:coarse)');
+let headerFrame = null;
+function updateMobileHeader() {
+  headerFrame = null;
+  if (!mobileHeaderMedia.matches) { siteHeader.classList.remove('is-compact'); return; }
+  if (document.body.classList.contains('modal-open')) return;
+  const compact = siteHeader.classList.contains('is-compact');
+  if (!compact && window.scrollY > 96 && !siteHeader.querySelector('.brand').contains(document.activeElement)) siteHeader.classList.add('is-compact');
+  else if (compact && window.scrollY < 16) siteHeader.classList.remove('is-compact');
+}
+function scheduleHeaderUpdate() {
+  if (headerFrame === null) headerFrame = requestAnimationFrame(updateMobileHeader);
+}
+window.addEventListener('scroll', scheduleHeaderUpdate, {passive:true});
+window.addEventListener('resize', scheduleHeaderUpdate, {passive:true});
+siteHeader.addEventListener('focusout', scheduleHeaderUpdate);
+updateMobileHeader();
 function setLargeText(enabled) {
   document.documentElement.classList.toggle('large-text', enabled);
   fontButton.setAttribute('aria-pressed', String(enabled));
   fontButton.title = enabled ? 'Trở về cỡ chữ thông thường' : 'Tăng cỡ chữ trên trang';
+  fontButton.setAttribute('aria-label', fontButton.title);
 }
 try { setLargeText(localStorage.getItem('pa05-large-text') === 'true'); } catch (_) {}
 fontButton.addEventListener('click', () => {
