@@ -1,73 +1,111 @@
 'use strict';
 // All reading and downloads remain available without JavaScript.
 document.documentElement.classList.add('js');
-// Decorative banknotes orbit the margins of the first screen, once for 3 seconds.
+// A single three-second shower of decorative notes across the opening viewport.
+let stopMoneyIntro = null;
 function playMoneyIntro() {
   const hero = document.querySelector('.hero');
   const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   if (!hero || motionPreference.matches || document.visibilityState === 'hidden') return;
-  if (location.hash && !['#dau-trang', '#noi-dung'].includes(location.hash)) return;
-  const bounds = hero.getBoundingClientRect();
-  const width = bounds.width;
-  const height = Math.min(bounds.height, window.innerHeight - Math.max(0, bounds.top));
+  if (window.scrollY > 120 || (location.hash && !['#dau-trang', '#noi-dung'].includes(location.hash))) return;
+  if (stopMoneyIntro) stopMoneyIntro();
+  const width = window.innerWidth;
+  const mobile = width <= 600;
+  const height = window.innerHeight;
   if (height <= 0) return;
   const layer = document.createElement('div');
   layer.className = 'intro-money'; layer.setAttribute('aria-hidden', 'true');
   layer.style.setProperty('--intro-height', `${height}px`);
-  const paths = [
-    [[-.08,.66], [.015,.44], [.025,.19], [.09,.05], [.2,-.13]],
-    [[1.02,.72], [.92,.58], [.87,.33], [.95,.13], [1.07,-.12]],
-    [[-.1,.13], [.04,.08], [.2,.03], [.38,.045], [.57,-.1]],
-    [[1.05,.08], [.88,.035], [.73,.08], [.62,.035], [.47,-.12]],
-    [[.96,1.02], [.86,.85], [.8,.61], [.91,.4], [1.08,.34]],
-    [[-.09,.98], [.015,.87], [.035,.69], [.015,.49], [-.11,.38]]
-  ];
   const colors = [['#cdeee2','#14665d'], ['#d8e8f7','#245f8e'], ['#f3e4bd','#80601b']];
-  const count = width <= 600 ? 4 : 6;
+  const count = mobile ? 36 : 68;
+  // Distribute three waves across the width, with varied sizes, speed and drift.
+  let seed = 705;
+  const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
   const artwork = '<svg class="money-paper" viewBox="0 0 100 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect class="money-face" x="2" y="2" width="96" height="52" rx="7"/><rect class="money-frame" x="8" y="8" width="84" height="40" rx="3"/><ellipse class="money-seal" cx="50" cy="28" rx="18" ry="21"/><text class="money-mark" x="50" y="37">₫</text><circle class="money-ink" cx="18" cy="28" r="3"/><circle class="money-ink" cx="82" cy="28" r="3"/><path class="money-frame" d="M12 17h14M74 39h14M12 39h8M80 17h8"/></svg>';
   for (let index = 0; index < count; index++) {
     const note = document.createElement('span'); note.className = 'money-note';
     note.innerHTML = artwork;
-    const delay = index * 75;
+    const wave = index % 3;
+    const column = Math.floor(index / 3);
+    const columns = Math.ceil(count / 3);
+    const size = (mobile ? 44 : 64) + random() * (mobile ? 30 : 42);
+    const x = ((column + .15 + random() * .7) / columns) * (width - size);
+    const drift = (random() - .5) * (mobile ? 120 : 240);
+    const sway = 12 + random() * 24;
+    const rotation = (random() - .5) * 90;
+    const spin = (index % 2 ? -1 : 1) * (70 + random() * 150);
+    const delay = wave * 320 + random() * 180;
     note.style.setProperty('--flight-delay', `${delay}ms`);
-    note.style.setProperty('--flight-duration', `${3000 - delay}ms`);
-    note.style.setProperty('--note-fill', colors[index % colors.length][0]);
-    note.style.setProperty('--note-ink', colors[index % colors.length][1]);
-    paths[index].forEach(([x,y], step) => {
-      note.style.setProperty(`--x${step}`, `${Math.round(x * width)}px`);
-      note.style.setProperty(`--y${step}`, `${Math.round(y * height)}px`);
-      note.style.setProperty(`--r${step}`, `${(index % 2 ? -1 : 1) * [-24,12,-16,20,42][step]}deg`);
+    note.style.setProperty('--flight-duration', `${1900 + random() * 250}ms`);
+    note.style.setProperty('--note-size', `${size}px`);
+    note.style.setProperty('--money-opacity', `${.74 + random() * .22}`);
+    note.style.setProperty('--flutter-duration', `${420 + random() * 380}ms`);
+    const color = colors[(column + wave) % colors.length];
+    note.style.setProperty('--note-fill', color[0]);
+    note.style.setProperty('--note-ink', color[1]);
+    [0,.18,.48,.74,1].forEach((progress, step) => {
+      const horizontal = x + drift * progress + Math.sin(progress * Math.PI * 3) * sway;
+      note.style.setProperty(`--x${step}`, `${Math.round(horizontal)}px`);
+      note.style.setProperty(`--y${step}`, `${Math.round(-100 + (height + 220) * progress)}px`);
+      note.style.setProperty(`--r${step}`, `${rotation + spin * progress}deg`);
     });
     layer.appendChild(note);
   }
-  hero.prepend(layer);
+  document.body.appendChild(layer);
   let timer;
   const stop = () => {
     layer.remove(); clearTimeout(timer);
+    if (stopMoneyIntro === stop) stopMoneyIntro = null;
     document.removeEventListener('visibilitychange', onVisibility);
     window.removeEventListener('resize', onResize);
+    window.removeEventListener('scroll', onScroll);
     if (typeof motionPreference.removeEventListener === 'function') motionPreference.removeEventListener('change', onPreference);
     else motionPreference.removeListener(onPreference);
   };
   const onVisibility = () => { if (document.visibilityState === 'hidden') stop(); };
   const onPreference = () => { if (motionPreference.matches) stop(); };
-  const onResize = () => { if (Math.abs(hero.getBoundingClientRect().width - width) > 24) stop(); };
+  const onResize = () => { if (Math.abs(window.innerWidth - width) > 24) stop(); };
+  const onScroll = () => { if (window.scrollY > 120) stop(); };
   document.addEventListener('visibilitychange', onVisibility);
   window.addEventListener('resize', onResize);
+  window.addEventListener('scroll', onScroll, {passive:true});
   if (typeof motionPreference.addEventListener === 'function') motionPreference.addEventListener('change', onPreference);
   else motionPreference.addListener(onPreference);
+  stopMoneyIntro = stop;
   timer = setTimeout(stop, 3000);
 }
-const startMoneyIntro = () => requestAnimationFrame(() => requestAnimationFrame(playMoneyIntro));
+let moneyIntroStarted = false;
+const startMoneyIntro = () => {
+  if (moneyIntroStarted || document.visibilityState === 'hidden' || document.readyState !== 'complete') return;
+  moneyIntroStarted = true;
+  document.removeEventListener('visibilitychange', startMoneyIntro);
+  requestAnimationFrame(() => requestAnimationFrame(() => playMoneyIntro()));
+};
+document.addEventListener('visibilitychange', startMoneyIntro);
 if (document.readyState === 'complete') startMoneyIntro();
 else window.addEventListener('load', startMoneyIntro, {once:true});
 const fontButton = document.querySelector('.font-toggle');
 // Collapse only the identity row on small screens; keep navigation reachable.
 const siteHeader = document.querySelector('.site-header');
 const mobileHeaderMedia = window.matchMedia('(max-width:800px), (max-width:1000px) and (hover:none) and (pointer:coarse)');
+const sectionLinks = Array.from(siteHeader.querySelectorAll('nav a'));
+const navigationSections = sectionLinks.map(link => document.querySelector(link.getAttribute('href')));
+function updateSectionNavigation() {
+  const readingLine = siteHeader.getBoundingClientRect().bottom + Math.min(160,window.innerHeight*.2);
+  let current = -1;
+  navigationSections.forEach((section,index) => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top <= readingLine && rect.bottom > readingLine) current = index;
+  });
+  sectionLinks.forEach((link,index) => {
+    if (index === current) link.setAttribute('aria-current','location');
+    else link.removeAttribute('aria-current');
+  });
+}
 let headerFrame = null;
 function updateMobileHeader() {
   headerFrame = null;
+  updateSectionNavigation();
   if (!mobileHeaderMedia.matches) { siteHeader.classList.remove('is-compact'); return; }
   if (document.body.classList.contains('modal-open')) return;
   const compact = siteHeader.classList.contains('is-compact');
@@ -233,10 +271,11 @@ async function changePage(direction) {
 function renderImage() {
   const list = media[currentGroup];
   const item = list[currentIndex];
-  const title = currentGroup === 'book' ? 'Cẩm nang an toàn thanh toán số' : item.title;
+  const title = item.title;
   document.getElementById('viewer-title').textContent = title;
   document.getElementById('viewer-title').title = title;
-  document.getElementById('viewer-count').textContent = `${currentGroup === 'book' ? 'Trang' : `Áp phích ${item.id} ·`} ${currentIndex + 1} / ${list.length}`;
+  document.getElementById('viewer-count').textContent = `${currentGroup === 'book' ? 'Cẩm nang · Trang' : `Áp phích số ${item.id} ·`} ${currentIndex + 1} / ${list.length}`;
+  dialog.style.setProperty('--page-progress', `${(currentIndex+1)/list.length*100}%`);
   image.src = item.image;
   image.alt = item.title;
   const download = document.getElementById('download-image');
