@@ -1,0 +1,85 @@
+/* The desktop checker occupies the viewport below the existing navigation. */
+@media(min-width:801px){
+  html.desktop-check-fit-enabled{scroll-padding-top:var(--desktop-check-header-height,101px)}
+  #kiem-tra{scroll-margin-top:0}
+  .desktop-check-screen{display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:12px;padding-block:12px}
+  .js .desktop-check-screen{height:calc(100vh - var(--desktop-check-header-height,101px) - 2px);height:calc(100dvh - var(--desktop-check-header-height,101px) - 2px);min-height:0}
+  .desktop-check-screen .section-heading{margin:0;gap:16px;align-items:center}
+  .desktop-check-screen .eyebrow{font-size:14px;line-height:1.25;margin:0 0 4px;padding-block:0}
+  .desktop-check-screen h2{font-size:28px;line-height:1.25}
+  .desktop-check-screen .section-heading p:not(.eyebrow){font-size:16px;line-height:1.35;margin-top:4px}
+  .desktop-check-screen .check-layout{grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:18px;min-height:0;align-items:stretch}
+  .desktop-check-screen .check-form{display:grid;grid-template-rows:minmax(0,1fr) auto;gap:8px;min-height:0}
+  .desktop-check-screen fieldset{position:relative;min-height:0;height:100%;padding-top:30px}
+  .desktop-check-screen legend{position:absolute;top:0;left:0;padding:0;margin:0;font-size:17px;line-height:23px}
+  .desktop-check-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(3,minmax(0,1fr));gap:8px;height:100%;min-height:0}
+  .desktop-check-screen .check-choice{position:relative;display:flex;align-items:center;margin:0;padding:12px;min-height:44px;min-width:0;border-radius:12px;line-height:1.3;gap:0}
+  .desktop-check-screen .check-choice input{position:absolute;top:8px;right:10px;width:22px;height:22px;margin:0}
+  .desktop-check-screen .check-choice>span{width:100%}
+  .desktop-check-screen .check-choice strong{font-size:17.5px;line-height:1.3}
+  .desktop-check-screen .check-choice strong::before{content:"";float:right;width:28px;height:24px;margin-left:4px}
+  .desktop-check-screen .check-choice small{font-size:15.5px;line-height:1.35;margin-top:6px}
+  .desktop-check-screen .choice-selected{display:none!important}
+  .desktop-check-screen .check-form-footer{margin:0;gap:10px;flex-wrap:nowrap}
+  .desktop-check-screen .check-form-footer p{min-width:0;font-size:14px;line-height:1.3}
+  .desktop-check-screen .check-form-footer button{font-size:15px;min-height:44px;padding:6px 12px;white-space:nowrap}
+  .desktop-check-screen .check-result{position:static;display:flex;flex-direction:column;padding:14px;min-height:0;border-radius:16px;gap:12px}
+  .desktop-check-overview{display:grid;grid-template-columns:118px minmax(0,1fr);gap:14px}
+  .desktop-check-screen .check-result-label{font-size:14px;line-height:1.3;letter-spacing:0}
+  .desktop-check-screen .check-score{margin:3px 0 5px;gap:4px;line-height:1.1}
+  .desktop-check-screen #risk-score{font-size:42px}
+  .desktop-check-screen .score-max{font-size:19px}
+  .desktop-check-screen .check-meter{height:8px}
+  .desktop-check-screen .check-count{font-size:14px;line-height:1.3;margin:7px 0 0}
+  .desktop-check-screen .check-result h3{font-size:19px;line-height:1.3;padding:6px 8px;margin:0 0 7px}
+  .desktop-check-screen #check-result-text{font-size:16px;line-height:1.4}
+  .desktop-check-screen .check-advice{display:flex;flex-direction:column;flex:1;min-height:0;margin:0;padding-top:8px}
+  .desktop-advice-header{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px;min-height:44px}
+  .desktop-check-screen .check-advice h4{font-size:17px;line-height:1.25;margin:0}
+  .desktop-advice-controls{display:flex;align-items:center;gap:6px}
+  #desktop-advice-count{font-size:14px;white-space:nowrap;color:#4e636b}
+  .desktop-advice-controls button{min-width:44px;min-height:44px;border:1px solid #719d90;border-radius:8px;background:#f5faf8;color:#123d48;font-size:14px;font-weight:750;padding:5px 8px;line-height:1.25;white-space:nowrap}
+  .desktop-advice-controls button:disabled{opacity:.5;cursor:default}
+  .desktop-check-screen .check-advice ul{list-style:none;padding:0;min-height:0;font-size:17px;line-height:1.4}
+  .desktop-check-screen .check-advice li{padding-left:12px;border-left:3px solid var(--risk-color)}
+  .desktop-check-screen .check-advice li+li{margin-top:12px}
+  .desktop-check-screen .check-note{font-size:14px;line-height:1.3;margin:0;padding-top:8px}
+  .desktop-check-footer{display:grid;grid-template-columns:minmax(0,1fr) 174px;gap:12px;align-items:center;position:relative}
+  .desktop-check-screen .check-help{display:flex;align-items:center;flex-direction:row;justify-content:space-between;padding:8px 12px;margin:0;gap:12px;min-height:56px;border-radius:12px}
+  .desktop-check-screen .check-help strong{font-size:16px;line-height:1.35;display:block}
+  .desktop-check-screen .check-help p{font-size:14px;line-height:1.3;margin-top:3px}
+  .desktop-check-screen .check-help .button{min-height:44px;font-size:15px;padding:6px 12px;line-height:1.3;white-space:normal}
+  .desktop-check-sources{position:relative;font-size:14px;line-height:1.4}
+  .desktop-check-sources>summary{display:flex;align-items:center;justify-content:center;gap:5px;min-height:44px;border:1px solid #719d90;border-radius:9px;background:white;color:#105a50;cursor:pointer;font-weight:700;padding:6px 8px;list-style:none;text-align:center}
+  .desktop-check-sources>summary::after{content:"⌃"}
+  .desktop-check-sources[open]>summary{background:#e4f1eb}
+  .desktop-source-panel{position:absolute;right:0;bottom:calc(100% + 8px);width:min(640px,calc(100vw - 64px));max-height:calc(100dvh - 180px);overflow:auto;padding:16px;border:1px solid #719d90;border-radius:12px;box-shadow:0 8px 28px #123d4826;background:white;z-index:4}
+  .desktop-source-panel .check-source{margin:0;font-size:15px;line-height:1.45}
+  .desktop-source-panel .text-link{font-size:15px;min-height:44px}
+  .large-text .desktop-check-screen h2{font-size:32px}
+  .large-text .desktop-check-screen .check-choice strong{font-size:20px}
+  .large-text .desktop-check-screen .check-choice strong::before{height:30px}
+  .large-text .desktop-check-screen .check-choice small{font-size:17px}
+  .large-text .desktop-check-screen #check-result-text{font-size:18px}
+  .large-text .desktop-check-screen .check-advice ul{font-size:19px}
+  .desktop-check-screen[data-density="compact"]{gap:6px;padding-block:6px}
+  .desktop-check-screen[data-density="compact"] .eyebrow{display:none}
+  .desktop-check-screen[data-density="compact"] h2{font-size:23px;line-height:1.2}
+  .desktop-check-screen[data-density="compact"] .section-heading p:not(.eyebrow){line-height:1.2}
+  .desktop-check-screen[data-density="compact"] .check-layout{gap:12px;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+  .desktop-check-screen[data-density="compact"] .desktop-check-options{gap:6px}
+  .desktop-check-screen[data-density="compact"] .check-choice{padding:8px}
+  .desktop-check-screen[data-density="compact"] .check-choice input{top:6px;right:6px}
+  .desktop-check-screen[data-density="compact"] .check-choice strong{font-size:16.5px;line-height:1.25}
+  .desktop-check-screen[data-density="compact"] .check-choice small{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  .desktop-check-screen[data-density="compact"] .check-help p{display:none}
+  .desktop-check-screen[data-density="compact"] .check-help{padding:0 8px;min-height:46px}
+  .desktop-check-screen[data-density="compact"] .check-result{padding:10px;gap:6px}
+  .desktop-check-screen[data-density="compact"] .desktop-advice-header{margin-bottom:4px}
+  .desktop-check-screen[data-density="compact"] .check-note{padding-top:4px}
+  .desktop-check-screen[data-density="compact"] .desktop-check-overview{grid-template-columns:118px minmax(0,1fr);gap:10px}
+  .desktop-check-screen[data-density="compact"] #check-result-text{font-size:15.5px;line-height:1.3}
+  .desktop-check-screen[data-density="compact"] .check-result h3{font-size:17px;margin-bottom:5px;padding:4px 6px}
+  .large-text .desktop-check-screen[data-density="compact"] .check-choice strong{font-size:18.5px;line-height:1.22}
+  .large-text .desktop-check-screen[data-density="compact"] #check-result-text{font-size:17px}
+}

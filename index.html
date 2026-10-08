@@ -9,7 +9,7 @@
       content="Cẩm nang và 10 áp phích giúp nhận diện lừa đảo, bảo vệ tài khoản ngân hàng và thanh toán số an toàn. Phòng An ninh mạng - Công an tỉnh Hà Tĩnh."
     />
     <title>Cẩm nang an toàn thanh toán số | PA05 Hà Tĩnh</title>
-    <link rel="icon" href="assets/favicon.svg?v=10" type="image/svg+xml" />
+    <link rel="icon" href="assets/favicon.svg?v=18" type="image/svg+xml" />
     <link
       rel="preload"
       href="assets/fonts/noto-sans-variable.ttf"
@@ -17,7 +17,7 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="assets/css/styles.css?v=10" />
+    <link rel="stylesheet" href="assets/css/styles.css?v=18" />
     <link
       rel="preload"
       href="assets/fonts/noto-sans-variable.ttf"
@@ -25,7 +25,7 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="assets/css/viewer.css?v=10" />
+    <link rel="stylesheet" href="assets/css/viewer.css?v=18" />
     <link
       rel="preload"
       href="assets/fonts/noto-sans-variable.ttf"
@@ -33,7 +33,7 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="assets/css/hero-motion.css?v=10" />
+    <link rel="stylesheet" href="assets/css/hero-motion.css?v=18" />
     <link
       rel="preload"
       href="assets/fonts/noto-sans-variable.ttf"
@@ -41,7 +41,7 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="assets/css/mobile-header.css?v=10" />
+    <link rel="stylesheet" href="assets/css/mobile-header.css?v=18" />
     <link
       rel="preload"
       href="assets/fonts/noto-sans-variable.ttf"
@@ -49,8 +49,11 @@
       type="font/ttf"
       crossorigin
     />
-    <link rel="stylesheet" href="assets/css/interaction.css?v=10" />
-    <script src="assets/js/app.js?v=10" defer></script>
+    <link rel="stylesheet" href="assets/css/interaction.css?v=18" />
+    <link rel="stylesheet" href="assets/css/check-now.css?v=18" />
+    <script src="assets/js/app.js?v=18" defer></script>
+    <script src="assets/js/check-now.js?v=18" defer></script>
+    <link rel="stylesheet" href="assets/css/check-desktop-fit.css?v=18" />
   </head>
   <body>
     <a class="skip-link" href="#noi-dung">Đến nội dung chính</a>
@@ -62,7 +65,7 @@
           aria-label="Phòng An ninh mạng - Công an tỉnh Hà Tĩnh, đầu trang"
           ><span class="brand-icon" aria-hidden="true"
             ><img
-              src="assets/brand-logo.svg?v=10"
+              src="assets/brand-logo.svg?v=18"
               width="52"
               height="52"
               alt="" /></span
@@ -74,6 +77,7 @@
         >
         <nav aria-label="Điều hướng chính">
           <a href="#cam-nang">Cẩm nang</a><a href="#ap-phich">Áp phích</a
+          ><a href="#kiem-tra">Kiểm tra ngay</a
           ><a href="#tai-tai-lieu">Tài liệu</a>
         </nav>
         <button
@@ -110,7 +114,8 @@
             </div>
             <p class="hero-meta">Dành cho học sinh, sinh viên và cộng đồng</p>
             <p class="page-context">
-              Cẩm nang, Áp phích và Tài liệu là 3 mục trên cùng trang.
+              Cẩm nang, Áp phích, Kiểm tra ngay và Tài liệu là 4 mục trên cùng
+              trang.
             </p>
           </div>
           <a
@@ -1080,6 +1085,336 @@
         </div>
       </section>
       <section
+        class="check-section"
+        id="kiem-tra"
+        aria-labelledby="check-heading"
+      >
+        <div class="check-desktop">
+          <div class="container section desktop-check-screen">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">03 · KIỂM TRA NGAY</p>
+                <h2 id="check-heading">Tình huống này có đáng ngờ?</h2>
+                <p>Chọn các dấu hiệu đang gặp. Xem điểm và lời khuyên ngay.</p>
+              </div>
+            </div>
+
+            <div class="check-mobile-summary" id="check-mobile-summary" hidden>
+              <div>
+                <span class="summary-label">Điểm cảnh báo</span
+                ><strong
+                  ><span id="check-mobile-score">0</span>/100 ·
+                  <span id="check-mobile-level">Chưa đủ thông tin</span></strong
+                >
+              </div>
+              <a class="text-link" href="#check-result">Chi tiết ↓</a>
+            </div>
+
+            <div class="check-layout">
+              <form id="risk-check" class="check-form">
+                <fieldset id="check-choices" disabled>
+                  <legend>Chọn tất cả dấu hiệu phù hợp</legend>
+                  <div class="desktop-check-options">
+                    <label class="check-choice"
+                      ><input type="checkbox" name="risk" value="secret" /><span
+                        ><strong>Yêu cầu gửi OTP, mật khẩu hoặc mã PIN.</strong
+                        ><small
+                          >Qua tin nhắn, cuộc gọi hay đường link họ gửi.</small
+                        ><span class="choice-selected">✓ Đã chọn</span></span
+                      ></label
+                    >
+
+                    <label class="check-choice"
+                      ><input type="checkbox" name="risk" value="link" /><span
+                        ><strong
+                          >Mời quét QR, mở link hoặc cài ứng dụng lạ.</strong
+                        ><small
+                          >Để “nhận tiền”, “hoàn tiền” hoặc “hỗ trợ từ
+                          xa”.</small
+                        ><span class="choice-selected">✓ Đã chọn</span></span
+                      ></label
+                    >
+
+                    <label class="check-choice"
+                      ><input
+                        type="checkbox"
+                        name="risk"
+                        value="transfer"
+                      /><span
+                        ><strong
+                          >Đòi chuyển tiền để xác minh, mở khóa, nhận
+                          thưởng.</strong
+                        ><small
+                          >Màn hình ngân hàng lại yêu cầu chuyển tiền
+                          thật.</small
+                        ><span class="choice-selected">✓ Đã chọn</span></span
+                      ></label
+                    >
+
+                    <label class="check-choice"
+                      ><input
+                        type="checkbox"
+                        name="risk"
+                        value="account"
+                      /><span
+                        ><strong>Nhờ mở hộ, thuê hoặc mượn tài khoản.</strong
+                        ><small
+                          >Yêu cầu giao SIM, thẻ, mật khẩu hoặc xác thực
+                          hộ.</small
+                        ><span class="choice-selected">✓ Đã chọn</span></span
+                      ></label
+                    >
+
+                    <label class="check-choice"
+                      ><input type="checkbox" name="risk" value="bill" /><span
+                        ><strong>Chỉ gửi ảnh chuyển tiền, tiền chưa vào.</strong
+                        ><small>Vẫn giục giao hàng hoặc hoàn trả tiền.</small
+                        ><span class="choice-selected">✓ Đã chọn</span></span
+                      ></label
+                    >
+
+                    <label class="check-choice"
+                      ><input
+                        type="checkbox"
+                        name="risk"
+                        value="pressure"
+                      /><span
+                        ><strong>Giục làm gấp hoặc giữ bí mật.</strong
+                        ><small
+                          >Kể cả khi tên người nhận hay video trông quen.</small
+                        ><span class="choice-selected">✓ Đã chọn</span></span
+                      ></label
+                    >
+                  </div>
+                </fieldset>
+
+                <div class="check-form-footer">
+                  <p>Chỉ chọn dấu hiệu; không nhập thông tin tài khoản.</p>
+                  <span class="js-only"
+                    ><button type="reset" class="button secondary small">
+                      Bỏ chọn tất cả
+                    </button></span
+                  >
+                </div>
+              </form>
+
+              <div
+                class="check-result"
+                id="check-result"
+                data-level="unknown"
+                hidden
+                aria-labelledby="check-result-heading"
+              >
+                <div class="desktop-check-overview">
+                  <div class="desktop-check-scale">
+                    <p class="check-result-label" id="check-score-label">
+                      Điểm cảnh báo
+                    </p>
+
+                    <div class="check-score">
+                      <span id="risk-score">0</span
+                      ><span class="score-max">/100</span>
+                    </div>
+
+                    <div
+                      id="risk-meter"
+                      class="check-meter"
+                      role="meter"
+                      aria-labelledby="check-score-label"
+                      aria-valuemin="0"
+                      aria-valuemax="100"
+                      aria-valuenow="0"
+                      aria-valuetext="0 trên 100. Chưa đủ thông tin."
+                    >
+                      <span id="risk-meter-fill" aria-hidden="true"></span>
+                    </div>
+
+                    <p class="check-count" id="check-count">
+                      Đã chọn 0 / 6 dấu hiệu
+                    </p>
+                  </div>
+                  <div class="desktop-check-status">
+                    <h3 id="check-result-heading">Chưa đủ thông tin</h3>
+
+                    <p id="check-result-text">
+                      Chưa chọn dấu hiệu không có nghĩa là giao dịch an toàn.
+                      Hãy xác minh người nhận trước khi chuyển.
+                    </p>
+                  </div>
+                </div>
+                <div class="check-advice">
+                  <div class="desktop-advice-header">
+                    <h4>Việc nên làm</h4>
+                    <div class="desktop-advice-controls js-only">
+                      <span id="desktop-advice-count">1 / 2</span
+                      ><button
+                        type="button"
+                        id="desktop-advice-prev"
+                        aria-label="Lời khuyên trước"
+                        disabled
+                      >
+                        ← Trước</button
+                      ><button
+                        type="button"
+                        id="desktop-advice-next"
+                        aria-label="Lời khuyên sau"
+                        disabled
+                      >
+                        Sau →
+                      </button>
+                    </div>
+                  </div>
+                  <ul id="check-advice-list">
+                    <li>
+                      Liên hệ người nhận qua số điện thoại hoặc kênh chính thức
+                      đã biết.
+                    </li>
+                    <li>
+                      Tự kiểm tra thông tin giao dịch trong ứng dụng ngân hàng.
+                    </li>
+                  </ul>
+                </div>
+
+                <p class="check-note">
+                  Điểm tham khảo, không phải xác suất bị lừa.
+                </p>
+
+                <p
+                  id="check-announcement"
+                  class="sr-only"
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                ></p>
+              </div>
+            </div>
+
+            <noscript
+              ><p class="check-nojs">
+                Bật JavaScript để tính điểm. Bạn vẫn có thể đọc 6 dấu hiệu trên;
+                nếu có nghi vấn, hãy dừng và xác minh qua kênh chính thức.
+              </p></noscript
+            >
+
+            <div class="desktop-check-footer">
+              <div class="check-help">
+                <div>
+                  <strong>Đã chuyển tiền hoặc lỡ cung cấp thông tin?</strong>
+                  <p>
+                    Bình tĩnh, hành động sớm. Đừng chuyển thêm tiền để “lấy lại
+                    tiền”.
+                  </p>
+                </div>
+                <a class="button primary" href="#can-ho-tro"
+                  >Đã chuyển tiền? Xem cách xử lý
+                  <span aria-hidden="true">↓</span></a
+                >
+              </div>
+
+              <details class="desktop-check-sources">
+                <summary>Nguồn tham khảo</summary>
+                <div class="desktop-source-panel">
+                  <p class="check-source">
+                    Dấu hiệu tham khảo từ Cổng TTĐT Bộ Công an:
+                    <a
+                      class="text-link"
+                      href="https://www.bocongan.gov.vn/bai-viet/nang-cao-canh-giac-truoc-25-kich-ban-lua-dao-tren-khong-gian-mang-nam-2026-1788865614"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Cảnh báo lừa đảo trên không gian mạng<span
+                        class="sr-only"
+                      >
+                        (mở trong thẻ mới)</span
+                      >
+                      ↗</a
+                    >;
+                    <a
+                      class="text-link"
+                      href="https://bocongan.gov.vn/bai-viet/canh-bao-vi-pham-phap-luat-thong-qua-tai-khoan-ngan-hang-doi-voi-doanh-nghiep-ho-kinh-doanh-ca-nhan-1787901909"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Cảnh báo về tài khoản ngân hàng<span class="sr-only">
+                        (mở trong thẻ mới)</span
+                      >
+                      ↗</a
+                    >;
+                    <a
+                      class="text-link"
+                      href="https://www.bocongan.gov.vn/bai-viet/canh-bao-thu-doan-gia-danh-co-quan-cong-an-gui-tin-nhan-phat-nguoi-kem-duong-link-gia-mao-de-lua-dao-chiem-doat-tai-san-1788945012"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >Khuyến cáo bảo vệ tài khoản<span class="sr-only">
+                        (mở trong thẻ mới)</span
+                      >
+                      ↗</a
+                    >. Thang điểm do website quy ước để hỗ trợ cảnh giác.
+                  </p>
+                </div>
+              </details>
+            </div>
+          </div>
+        </div>
+        <div class="container check-mobile-entry">
+          <h2>Kiểm tra ngay</h2>
+          <p>Chọn 6 dấu hiệu, xem điểm và lời khuyên trong một màn hình.</p>
+          <button
+            class="button primary"
+            type="button"
+            id="open-mobile-check"
+            disabled
+          >
+            Bắt đầu kiểm tra →
+          </button>
+          <p class="check-note">
+            Không nhập thông tin tài khoản. Điểm chỉ để tham khảo.
+          </p>
+          <noscript
+            ><p>
+              Bật JavaScript để kiểm tra. Bạn vẫn có thể
+              <a class="text-link" href="#cam-nang"
+                >đọc dấu hiệu trong cẩm nang</a
+              >.
+            </p></noscript
+          >
+          <details class="mobile-check-sources">
+            <summary>Nguồn tham khảo</summary>
+            <p class="check-source">
+              Dấu hiệu tham khảo từ Cổng TTĐT Bộ Công an:
+              <a
+                class="text-link"
+                href="https://www.bocongan.gov.vn/bai-viet/nang-cao-canh-giac-truoc-25-kich-ban-lua-dao-tren-khong-gian-mang-nam-2026-1788865614"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Cảnh báo lừa đảo trên không gian mạng<span class="sr-only">
+                  (mở trong thẻ mới)</span
+                >
+                ↗</a
+              >;
+              <a
+                class="text-link"
+                href="https://bocongan.gov.vn/bai-viet/canh-bao-vi-pham-phap-luat-thong-qua-tai-khoan-ngan-hang-doi-voi-doanh-nghiep-ho-kinh-doanh-ca-nhan-1787901909"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Cảnh báo về tài khoản ngân hàng<span class="sr-only">
+                  (mở trong thẻ mới)</span
+                >
+                ↗</a
+              >;
+              <a
+                class="text-link"
+                href="https://www.bocongan.gov.vn/bai-viet/canh-bao-thu-doan-gia-danh-co-quan-cong-an-gui-tin-nhan-phat-nguoi-kem-duong-link-gia-mao-de-lua-dao-chiem-doat-tai-san-1788945012"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Khuyến cáo bảo vệ tài khoản<span class="sr-only">
+                  (mở trong thẻ mới)</span
+                >
+                ↗</a
+              >. Thang điểm do website quy ước để hỗ trợ cảnh giác.
+            </p>
+          </details>
+        </div>
+      </section>
+      <section
         class="section container"
         id="can-ho-tro"
         aria-labelledby="help-heading"
@@ -1142,7 +1477,7 @@
       >
         <div class="section-heading">
           <div>
-            <p class="eyebrow">03 · TÀI LIỆU</p>
+            <p class="eyebrow">04 · TÀI LIỆU</p>
             <h2 id="downloads-heading">Tải tài liệu</h2>
             <p>Cẩm nang và áp phích giữ nguyên watermark của Phòng PA05.</p>
           </div>
@@ -1451,5 +1786,250 @@
         ]
       }
     </script>
+    <dialog
+      class="mobile-checker"
+      id="mobile-checker"
+      aria-labelledby="mobile-check-title"
+    >
+      <div class="mobile-checker-inner">
+        <header class="mobile-check-header">
+          <button
+            type="button"
+            id="close-mobile-check"
+            class="mobile-check-back"
+          >
+            Quay lại
+          </button>
+          <h2 id="mobile-check-title">Kiểm tra ngay</h2>
+          <button
+            type="button"
+            id="mobile-check-font"
+            class="mobile-check-font"
+            aria-label="A+ Tăng cỡ chữ"
+            aria-pressed="false"
+          >
+            A+
+          </button>
+        </header>
+        <div
+          class="mobile-check-score"
+          id="mobile-check-score"
+          data-level="unknown"
+        >
+          <div class="mobile-score-line">
+            <strong
+              ><span id="mobile-risk-score">0</span
+              ><span class="mobile-score-max">/100</span></strong
+            ><span id="mobile-risk-level">Chưa chọn dấu hiệu</span>
+          </div>
+          <div
+            id="mobile-risk-meter"
+            class="mobile-risk-meter"
+            role="meter"
+            aria-label="Điểm cảnh báo tham khảo"
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+            aria-valuetext="0 trên 100. Chưa chọn dấu hiệu."
+          >
+            <span id="mobile-risk-fill" aria-hidden="true"></span>
+          </div>
+        </div>
+        <p class="mobile-check-instruction">
+          Chọn ô giống tình huống <span id="mobile-check-count">0/6</span>
+        </p>
+        <form id="mobile-risk-check">
+          <fieldset id="mobile-check-choices" disabled>
+            <legend class="sr-only">
+              Chọn tất cả dấu hiệu phù hợp, có thể chọn nhiều ô
+            </legend>
+            <label class="mobile-risk-choice"
+              ><input
+                type="checkbox"
+                name="risk"
+                value="secret"
+                aria-label="Yêu cầu gửi OTP hoặc mật khẩu. Họ yêu cầu gửi mật khẩu, OTP hoặc PIN."
+              /><svg
+                class="mobile-choice-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="5" y="10" width="14" height="12" rx="3" />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3M12 15v3" /></svg
+              ><strong aria-hidden="true"
+                >Yêu cầu gửi OTP hoặc mật khẩu.</strong
+              ></label
+            ><label class="mobile-risk-choice"
+              ><input
+                type="checkbox"
+                name="risk"
+                value="link"
+                aria-label="Mời quét QR, mở link hoặc cài ứng dụng lạ. Họ yêu cầu mở link, quét QR hoặc cài ứng dụng lạ."
+              /><svg
+                class="mobile-choice-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="m10 14 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0M16 8l1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0"
+                /></svg
+              ><strong aria-hidden="true"
+                >Mời quét QR, mở link hoặc cài ứng dụng lạ.</strong
+              ></label
+            ><label class="mobile-risk-choice"
+              ><input
+                type="checkbox"
+                name="risk"
+                value="transfer"
+                aria-label="Đòi chuyển tiền để xác minh. Họ bắt chuyển tiền để xác minh, mở khóa hoặc nhận thưởng."
+              /><svg
+                class="mobile-choice-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M3 7h17m-4-4 4 4-4 4M21 17H4m4-4-4 4 4 4" /></svg
+              ><strong aria-hidden="true"
+                >Đòi chuyển tiền để xác minh.</strong
+              ></label
+            ><label class="mobile-risk-choice"
+              ><input
+                type="checkbox"
+                name="risk"
+                value="account"
+                aria-label="Nhờ mở hộ, thuê hoặc mượn tài khoản. Họ trả tiền để thuê, mượn tài khoản hoặc nhờ mở hộ."
+              /><svg
+                class="mobile-choice-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <rect x="2" y="4" width="20" height="16" rx="3" />
+                <circle cx="8" cy="10" r="2" />
+                <path d="M5 16c0-3 6-3 6 0M15 9h4M15 14h4" /></svg
+              ><strong aria-hidden="true"
+                >Nhờ mở hộ, thuê hoặc mượn tài khoản.</strong
+              ></label
+            ><label class="mobile-risk-choice"
+              ><input
+                type="checkbox"
+                name="risk"
+                value="bill"
+                aria-label="Chỉ gửi ảnh chuyển tiền, tiền chưa vào. Họ chỉ gửi ảnh chuyển tiền, tiền chưa vào nhưng vẫn giục giao hàng."
+              /><svg
+                class="mobile-choice-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 3h14v19l-3-2-4 2-4-2-3 2V3ZM9 8h6M9 12h6M9 16h3"
+                /></svg
+              ><strong aria-hidden="true"
+                >Chỉ gửi ảnh chuyển tiền, tiền chưa vào.</strong
+              ></label
+            ><label class="mobile-risk-choice"
+              ><input
+                type="checkbox"
+                name="risk"
+                value="pressure"
+                aria-label="Giục làm gấp hoặc giữ bí mật. Họ thúc giục, giữ bí mật hoặc không để bạn xác minh."
+              /><svg
+                class="mobile-choice-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M12 6v6l4 2" /></svg
+              ><strong aria-hidden="true"
+                >Giục làm gấp hoặc giữ bí mật.</strong
+              ></label
+            >
+          </fieldset>
+        </form>
+        <section
+          class="mobile-check-advice"
+          aria-labelledby="mobile-advice-title"
+        >
+          <div class="mobile-advice-header">
+            <h3 id="mobile-advice-title">
+              Lời khuyên <span id="mobile-advice-count">1/1</span>
+            </h3>
+            <div>
+              <button
+                type="button"
+                id="mobile-advice-prev"
+                aria-label="Trước: lời khuyên trước"
+                disabled
+              >
+                Trước</button
+              ><button
+                type="button"
+                id="mobile-advice-next"
+                aria-label="Sau: lời khuyên sau"
+                disabled
+              >
+                Sau
+              </button>
+            </div>
+          </div>
+          <ul id="mobile-advice-text" class="mobile-advice-list">
+            <li>
+              Gọi lại qua số đã biết để xác minh người nhận trước khi chuyển
+              tiền.
+            </li>
+          </ul>
+        </section>
+        <div class="mobile-check-controls">
+          <button
+            type="reset"
+            form="mobile-risk-check"
+            class="button secondary"
+          >
+            Làm lại</button
+          ><a class="button primary" id="mobile-check-help" href="#can-ho-tro"
+            ><span>Đã chuyển tiền?<br />Xem cách xử lý</span></a
+          >
+        </div>
+        <p class="mobile-check-note">
+          Điểm tham khảo, không phải xác suất bị lừa.
+        </p>
+        <p
+          id="mobile-check-announcement"
+          class="sr-only"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></p>
+      </div>
+    </dialog>
+    <script src="assets/js/check-desktop-fit.js?v=18" defer></script>
   </body>
 </html>

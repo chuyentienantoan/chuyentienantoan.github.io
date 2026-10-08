@@ -1,7 +1,7 @@
 'use strict';
 // All reading and downloads remain available without JavaScript.
 document.documentElement.classList.add('js');
-// A single three-second shower of decorative notes across the opening viewport.
+// A three-second CSS 3D shield deflects illustrative Vietnamese đồng notes.
 let stopMoneyIntro = null;
 function playMoneyIntro() {
   const hero = document.querySelector('.hero');
@@ -9,49 +9,71 @@ function playMoneyIntro() {
   if (!hero || motionPreference.matches || document.visibilityState === 'hidden') return;
   if (window.scrollY > 120 || (location.hash && !['#dau-trang', '#noi-dung'].includes(location.hash))) return;
   if (stopMoneyIntro) stopMoneyIntro();
-  const width = window.innerWidth;
-  const mobile = width <= 600;
-  const height = window.innerHeight;
+  const width = window.innerWidth, height = window.innerHeight;
   if (height <= 0) return;
+  const mobile = window.matchMedia('(max-width:600px), (hover:none) and (pointer:coarse)').matches;
+  const shieldSize = Math.min(mobile ? 168 : 246, width * (mobile ? .38 : .19), height * .36);
+  const shieldX = width * .69;
+  const shieldY = Math.max(shieldSize * .65 + 40, height * .46);
+  const impactX = shieldX - shieldSize * .20;
   const layer = document.createElement('div');
-  layer.className = 'intro-money'; layer.setAttribute('aria-hidden', 'true');
+  layer.className = 'intro-money intro-shield'; layer.setAttribute('aria-hidden', 'true');
   layer.style.setProperty('--intro-height', `${height}px`);
-  const colors = [['#cdeee2','#14665d'], ['#d8e8f7','#245f8e'], ['#f3e4bd','#80601b']];
-  const count = mobile ? 36 : 68;
-  // Distribute three waves across the width, with varied sizes, speed and drift.
+  layer.style.setProperty('--shield-size', `${shieldSize}px`);
+  layer.style.setProperty('--shield-x', `${shieldX}px`);
+  layer.style.setProperty('--shield-y', `${shieldY}px`);
+  const palettes = [
+    {fill:'#b7dbc3',ink:'#14634b',edge:'#648e73',value:'100.000 ₫'},
+    {fill:'#ecc9b4',ink:'#8b483f',edge:'#af7764',value:'200.000 ₫'},
+    {fill:'#b1dce3',ink:'#1c6277',edge:'#628f9b',value:'500.000 ₫'}
+  ];
+  const symbols = palettes.map((color,index) => `<symbol id="intro-dong-${index}" viewBox="0 0 160 78"><rect x="2" y="2" width="156" height="74" rx="5" fill="${color.fill}" stroke="${color.ink}" stroke-width="1.5"/><rect x="7" y="7" width="146" height="64" rx="3" fill="none" stroke="${color.ink}" stroke-opacity=".45"/><path d="M12 17h78M12 21h60M12 63h82M12 67h69" stroke="${color.ink}" stroke-opacity=".3"/><ellipse cx="123" cy="39" rx="24" ry="27" fill="none" stroke="${color.ink}" stroke-opacity=".28"/><ellipse cx="123" cy="39" rx="19" ry="22" fill="none" stroke="${color.ink}" stroke-opacity=".2"/><text x="14" y="34" class="money-country" fill="${color.ink}">VIỆT NAM ĐỒNG</text><text x="13" y="54" class="money-value" fill="${color.ink}">${color.value}</text><text x="123" y="49" class="money-mark" fill="${color.ink}" text-anchor="middle">₫</text><text x="15" y="65" class="money-model" fill="${color.ink}">MÔ PHỎNG</text></symbol>`).join('');
+  layer.innerHTML = `<svg class="intro-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs>${symbols}</defs></svg><span class="shield-aura"></span><div class="shield-stage"><div class="shield-solid"><span class="shield-depth depth-back"></span><span class="shield-depth depth-middle"></span><span class="shield-depth depth-edge"></span><svg class="shield-face" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="intro-shield-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2bc"/><stop offset=".42" stop-color="#c8a85c"/><stop offset=".7" stop-color="#fff1bd"/><stop offset="1" stop-color="#8f713b"/></linearGradient><linearGradient id="intro-shield-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#348886"/><stop offset=".42" stop-color="#14665d"/><stop offset="1" stop-color="#123d48"/></linearGradient></defs><path d="M50 5 L90 18 Q91 81 50 113 Q9 81 10 18Z" fill="url(#intro-shield-rim)"/><path d="M50 11 L84 23 Q83 77 50 105 Q17 77 16 23Z" fill="url(#intro-shield-face)"/><path d="M50 16 L78 26 Q77 74 50 99 Q23 74 22 26Z" fill="none" stroke="#afe3d2" stroke-opacity=".38"/><path d="M50 13 L18 24 Q19 76 50 104Z" fill="#fff" opacity=".075"/><rect x="32" y="49" width="36" height="31" rx="7" fill="#e8f7eb"/><path d="M40 49v-9a10 10 0 0 1 20 0v9" fill="none" stroke="#e8f7eb" stroke-width="5"/><path d="M41 64l6 6 12-13" fill="none" stroke="#14665d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 27L48 18" stroke="#fff8d7" stroke-width="2" stroke-linecap="round" opacity=".65"/></svg></div></div>`;
   let seed = 705;
   const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
-  const artwork = '<svg class="money-paper" viewBox="0 0 100 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><rect class="money-face" x="2" y="2" width="96" height="52" rx="7"/><rect class="money-frame" x="8" y="8" width="84" height="40" rx="3"/><ellipse class="money-seal" cx="50" cy="28" rx="18" ry="21"/><text class="money-mark" x="50" y="37">₫</text><circle class="money-ink" cx="18" cy="28" r="3"/><circle class="money-ink" cx="82" cy="28" r="3"/><path class="money-frame" d="M12 17h14M74 39h14M12 39h8M80 17h8"/></svg>';
+  const count = mobile ? 24 : 42;
   for (let index = 0; index < count; index++) {
+    const wave = index % 3, colorIndex = Math.floor(index / 3) % 3;
+    const size = (mobile ? 57 : 83) + random() * (mobile ? 23 : 29);
+    const duration = 1570 + random() * 150;
+    const delay = 100 + wave * 370 + random() * 160;
+    const hitY = shieldY + (random() - .5) * shieldSize * .44 - size * .245;
+    const hitX = impactX - size * .90;
+    const startY = shieldY - shieldSize * .25 + (random() - .5) * shieldSize * .50;
+    const rotation = (random() - .5) * 26;
     const note = document.createElement('span'); note.className = 'money-note';
-    note.innerHTML = artwork;
-    const wave = index % 3;
-    const column = Math.floor(index / 3);
-    const columns = Math.ceil(count / 3);
-    const size = (mobile ? 44 : 64) + random() * (mobile ? 30 : 42);
-    const x = ((column + .15 + random() * .7) / columns) * (width - size);
-    const drift = (random() - .5) * (mobile ? 120 : 240);
-    const sway = 12 + random() * 24;
-    const rotation = (random() - .5) * 90;
-    const spin = (index % 2 ? -1 : 1) * (70 + random() * 150);
-    const delay = wave * 320 + random() * 180;
-    note.style.setProperty('--flight-delay', `${delay}ms`);
-    note.style.setProperty('--flight-duration', `${1900 + random() * 250}ms`);
-    note.style.setProperty('--note-size', `${size}px`);
-    note.style.setProperty('--money-opacity', `${.74 + random() * .22}`);
-    note.style.setProperty('--flutter-duration', `${420 + random() * 380}ms`);
-    const color = colors[(column + wave) % colors.length];
-    note.style.setProperty('--note-fill', color[0]);
-    note.style.setProperty('--note-ink', color[1]);
-    [0,.18,.48,.74,1].forEach((progress, step) => {
-      const horizontal = x + drift * progress + Math.sin(progress * Math.PI * 3) * sway;
-      note.style.setProperty(`--x${step}`, `${Math.round(horizontal)}px`);
-      note.style.setProperty(`--y${step}`, `${Math.round(-100 + (height + 220) * progress)}px`);
-      note.style.setProperty(`--r${step}`, `${rotation + spin * progress}deg`);
+    note.innerHTML = `<span class="money-bill" data-value="${palettes[colorIndex].value}"><svg class="money-paper" viewBox="0 0 160 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><use href="#intro-dong-${colorIndex}"/></svg></span>`;
+    const points = [
+      [-size-50,startY,rotation-14],
+      [hitX*.30,startY-shieldSize*.22,rotation-8],
+      [hitX*.72,hitY-shieldSize*.13,rotation+3],
+      [hitX,hitY,rotation],
+      [hitX-size*.36,hitY-12,rotation+28],
+      [hitX-size*.74,hitY+shieldSize*.55,rotation+94],
+      [hitX-size*1.05,height+size,rotation+245]
+    ];
+    points.forEach(([x,y,r],step)=>{
+      note.style.setProperty(`--x${step}`,`${Math.round(x)}px`);
+      note.style.setProperty(`--y${step}`,`${Math.round(y)}px`);
+      note.style.setProperty(`--r${step}`,`${r}deg`);
     });
-    layer.appendChild(note);
+    note.style.setProperty('--flight-delay',`${delay}ms`);
+    note.style.setProperty('--flight-duration',`${duration}ms`);
+    note.style.setProperty('--note-size',`${size}px`);
+    note.style.setProperty('--note-edge',palettes[colorIndex].edge);
+    note.style.setProperty('--note-fill',palettes[colorIndex].fill);
+    note.style.setProperty('--note-ink',palettes[colorIndex].ink);
+    note.style.setProperty('--paper-turn',`${(index%2?1:-1)*(24+random()*16)}deg`);
+    layer.append(note);
+    // Three localized impact pulses, timed to actual notes reaching the face.
+    if (index < 3) {
+      const pulse = document.createElement('span');pulse.className='shield-impact';
+      pulse.style.left=`${impactX}px`;pulse.style.top=`${hitY+size*.245}px`;
+      pulse.style.setProperty('--impact-delay',`${delay+duration*.48}ms`);
+      layer.append(pulse);
+    }
   }
-  document.body.appendChild(layer);
+  document.body.append(layer);
   let timer;
   const stop = () => {
     layer.remove(); clearTimeout(timer);
@@ -74,6 +96,7 @@ function playMoneyIntro() {
   stopMoneyIntro = stop;
   timer = setTimeout(stop, 3000);
 }
+
 let moneyIntroStarted = false;
 const startMoneyIntro = () => {
   if (moneyIntroStarted || document.visibilityState === 'hidden' || document.readyState !== 'complete') return;
@@ -101,6 +124,7 @@ function updateSectionNavigation() {
     if (index === current) link.setAttribute('aria-current','location');
     else link.removeAttribute('aria-current');
   });
+  document.body.classList.toggle('using-checker',current >= 0 && navigationSections[current].id === 'kiem-tra');
 }
 let headerFrame = null;
 function updateMobileHeader() {
