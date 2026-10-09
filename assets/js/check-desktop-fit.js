@@ -13,7 +13,7 @@
   let fullMessage=summary.textContent;
   const briefLevels={unknown:'Chưa chọn dấu hiệu không có nghĩa là an toàn.',caution:'Tạm dừng, kiểm tra qua kênh đã biết.',elevated:'Chưa chuyển tiền hoặc giao hàng khi chưa xác minh.',high:'Dừng giao dịch. Xác minh qua kênh chính thức.'};
   let tips=Array.from(list.children,li=>li.textContent),brief=tips,compact=tips;
-  let index=0,shown=1,history=[0],frame=0,alignmentUntil=0,lastDesktop=null;
+  let index=0,shown=1,pageHistory=[0],frame=0,alignmentUntil=0,lastDesktop=null;
   const isDesktop=()=>getComputedStyle(document.querySelector('.check-desktop')).display!=='none';
   function renderAdvice(){
     if(!isDesktop())return;
@@ -64,13 +64,15 @@
     if(location.hash==='#kiem-tra'&&(performance.now()<alignmentUntil||Math.abs(oldTop-headerHeight)<60))align();
   }
   function scheduleFit(){cancelAnimationFrame(frame);frame=requestAnimationFrame(fit);}
-  form.addEventListener('checkupdated',event=>{
-    tips=event.detail.tips;brief=event.detail.brief;compact=event.detail.compact;
-    fullMessage=event.detail.message;
-    index=0;history=[0];fit();
-  });
-  previous.addEventListener('click',()=>{if(index===0)return;history.pop();index=history[history.length-1]||0;renderAdvice();});
-  next.addEventListener('click',()=>{if(index+shown>=tips.length)return;index+=shown;history.push(index);renderAdvice();});
+  function handleCheckUpdate(detail){
+    tips=detail.tips;brief=detail.brief;compact=detail.compact;
+    fullMessage=detail.message;
+    index=0;pageHistory=[0];fit();
+  }
+  form.addEventListener('checkupdated',event=>handleCheckUpdate(event.detail));
+  if(form._lastCheckDetail)handleCheckUpdate(form._lastCheckDetail);
+  previous.addEventListener('click',()=>{if(index===0)return;pageHistory.pop();index=pageHistory[pageHistory.length-1]||0;renderAdvice();});
+  next.addEventListener('click',()=>{if(index+shown>=tips.length)return;index+=shown;pageHistory.push(index);renderAdvice();});
   document.querySelectorAll('a[href="#kiem-tra"]').forEach(link=>link.addEventListener('click',event=>{
     if(!isDesktop()||event.button||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
     event.preventDefault();if(location.hash!=='#kiem-tra')window.history.pushState(null,'','#kiem-tra');

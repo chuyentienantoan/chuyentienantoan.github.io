@@ -132,8 +132,9 @@
     mobileMeter.setAttribute('aria-valuenow',String(score));mobileMeter.setAttribute('aria-valuetext',`${score} trên 100. ${mobileTitle}.`);
     document.getElementById('mobile-check-count').textContent=`${chosen.length}/6`;
     mobileTips=selected.length?selected.map(value=>({full:rules[value].advice,normal:shortAdvice[value],compact:compactAdvice[value]})):[{full:'Chưa chọn dấu hiệu không có nghĩa là an toàn. Gọi lại qua số đã biết để xác minh người nhận. Tự kiểm tra thông tin trong ứng dụng ngân hàng trước khi chuyển tiền.',normal:'Gọi lại qua số đã biết để xác minh người nhận trước khi chuyển tiền.',compact:'Gọi lại số đã biết để xác minh người nhận.'}];
-    tipIndex=0;tipPages=[0];renderTip();
-    form.dispatchEvent(new CustomEvent('checkupdated',{detail:{tips,message,brief:selected.length?selected.map(value=>shortAdvice[value]):tips,compact:selected.length?selected.map(value=>compactAdvice[value]):tips}}));
+    const detail = {tips,message,brief:selected.length?selected.map(value=>shortAdvice[value]):tips,compact:selected.length?selected.map(value=>compactAdvice[value]):tips};
+    form._lastCheckDetail = detail;
+    form.dispatchEvent(new CustomEvent('checkupdated',{detail}));
     if(announce){
       const text=`Đã chọn ${chosen.length} dấu hiệu. Điểm cảnh báo ${score} trên 100. ${title}.`;
       document.getElementById('check-announcement').textContent=text;

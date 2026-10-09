@@ -61,7 +61,6 @@
  .hero .book-cover{grid-row:1;grid-column:2;width:150px;height:min(100%,235px);max-height:100%;margin:0}
  .hero .book-badge{display:none}
 }
-
 /* Compact desktop header and a persistent mobile bottom navigation. */
 @media(min-width:801px){
  .site-header .header-inner{min-height:64px;padding-block:8px;gap:20px}

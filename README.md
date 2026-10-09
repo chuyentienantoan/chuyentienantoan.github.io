@@ -33,7 +33,7 @@ Nếu dùng repository có nội dung sẵn, có thể đặt bộ website trong
 - Khi mở tài liệu, toàn bộ trang tự vừa khung theo cả chiều cao và chiều rộng, không cần cuộn. Chế độ phóng to mới cần cuộn để đọc chi tiết; chọn **Vừa màn hình** để trở lại.
 - Popup có tiêu đề gọn một dòng. Trên điện thoại, các nút chuyển trang, phóng to và tải nằm ở thanh dưới; trên màn hình rộng, các nút gộp vào một thanh trên để dành thêm chỗ cho tài liệu.
 - Bìa cẩm nang nghiêng nhẹ và nâng lên khi rê chuột. Khiên và tiền dùng SVG minh họa, CSS3 transform/opacity, không chặn nút hay liên kết và được dọn sau 3 giây. Không lặp khi cuộn hoặc mở tài liệu. Hiệu ứng tự tắt khi cuộn khỏi màn hình đầu, bật giảm chuyển động, xoay màn hình hoặc chuyển sang tab khác.
-- Nút **A+ Chữ lớn** tăng chữ nội dung website. Với chữ trong ảnh, chọn **Mở xem → Phóng to**.
+- Với chữ trong ảnh, chọn **Mở xem → Phóng to**.
 - Tìm kiếm chấp nhận tiếng Việt có hoặc không dấu. Bộ lọc có thể kết hợp với tìm kiếm; xóa tìm kiếm sẽ đưa về tất cả áp phích.
 - Nhấn Esc hoặc Đóng để thoát trình xem; dùng Trước/Sau hoặc phím mũi tên để chuyển trang.
 - Trên điện thoại, vuốt trái để sang trang sau, vuốt phải để về trang trước. Có hiệu ứng lật nhẹ khoảng 0,32 giây; thiết bị bật giảm chuyển động sẽ chuyển trang trực tiếp. Khi phóng to, vuốt dùng để di chuyển ảnh, không lật trang. Trang đầu/cuối không tự vòng lại. Nếu mạng chậm, ảnh hiện tại vẫn được giữ trong lúc tải trang mới.

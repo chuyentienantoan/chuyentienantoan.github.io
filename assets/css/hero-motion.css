@@ -45,13 +45,11 @@
 }
 @media(prefers-reduced-motion:reduce){.intro-money{display:none}.book-cover,.book-cover:hover{transform:none!important}}
 @media print{.intro-money{display:none!important}}
-
 /* Four collision-timed halos; static gradients animate only opacity/transform. */
 .shield-hit-glow{position:absolute;left:var(--shield-x);top:var(--shield-y);width:calc(var(--shield-size) * 1.6);height:calc(var(--shield-size) * 1.8);border-radius:50%;z-index:0;opacity:0;pointer-events:none;background:radial-gradient(ellipse,transparent 27%,#d5fff280 43%,#f8df918c 53%,#9af0d840 64%,transparent 74%);animation:shield-collision-glow .44s ease-out var(--impact-delay) both;will-change:transform,opacity}
 @keyframes shield-collision-glow{0%{opacity:0;transform:translate(-50%,-50%) scale(.83)}15%{opacity:.9}100%{opacity:0;transform:translate(-50%,-50%) scale(1.16)}}
 .shield-caption{position:absolute;left:var(--shield-x);top:calc(var(--shield-y) + var(--shield-size) * .60 + 12px);z-index:3;transform:translateX(-50%) perspective(500px) rotateX(12deg) rotateY(-8deg);white-space:nowrap;padding:8px 16px;border:1px solid #a3d8c6;border-radius:999px;background:linear-gradient(145deg,#397f78,#123d48 75%);color:#f5faf7;text-shadow:0 1px 1px #062d36;box-shadow:0 2px 0 #699c8d,0 6px 0 #062d36,0 16px 22px #082b3d50;font:850 clamp(14px,calc(var(--shield-size) * .073),25px)/1.25 "PA05 Noto Sans",Arial,sans-serif;letter-spacing:.08em;animation:shield-caption-presence 3s ease both}
 @keyframes shield-caption-presence{0%{opacity:0}12%,83%{opacity:1}100%{opacity:0}}
-
 .shield-ground-shadow{position:absolute;left:var(--shield-x);top:calc(var(--shield-y) + var(--shield-size) * .59);width:calc(var(--shield-size) * .9);height:calc(var(--shield-size) * .18);background:radial-gradient(ellipse,#082b3d55,transparent 68%);transform:translate(-50%,-20%) rotate(-5deg);animation:shield-presence 3s ease both;pointer-events:none}
 .shield-solid::after{content:"";position:absolute;inset:0;clip-path:polygon(50% 4%,91% 19%,91% 47%,85% 66%,71% 83%,50% 96%,29% 83%,15% 66%,9% 47%,9% 19%);background:linear-gradient(120deg,#ffffff30,transparent 32%,transparent 70%,#092f3920);transform:translateZ(5px);pointer-events:none}
 /* A subtle backdrop gives the shield sequence focus, then clears with it. */

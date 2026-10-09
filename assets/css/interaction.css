@@ -5,7 +5,6 @@
 .button.secondary{border-color:var(--teal);color:var(--teal)}
 .button:active{transform:translateY(1px);box-shadow:none}
 .button:disabled{box-shadow:none;transform:none}
-.font-toggle{border-width:2px;border-color:var(--teal)}
 .site-header nav a{border:1px solid #9fbcb5;border-radius:9px;padding:8px 13px;text-decoration:none;background:#f5faf8;color:var(--navy);line-height:1.35;justify-content:center}
 .site-header nav a:hover{background:#e4f1eb;border-color:var(--teal);text-decoration:none}
 .site-header nav a[aria-current="location"]{background:var(--navy);border-color:var(--navy);color:white;box-shadow:inset 0 -3px 0 #b6e5d5}
@@ -39,6 +38,4 @@ details[open]>summary .chapter-toggle .toggle-chevron{transform:rotate(180deg)}
   .site-header.is-compact nav{gap:5px}
   .chapter summary{padding-inline:12px;gap:9px}
   .chapter-toggle{padding:6px 7px;font-size:.72rem}
-  .large-text .chapter-toggle{font-size:.65rem}
-  .large-text .viewer .viewer-count{font-size:14.5px}
 }

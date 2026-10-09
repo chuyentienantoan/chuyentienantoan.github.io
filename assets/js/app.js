@@ -162,7 +162,6 @@ window.addEventListener('scroll', scheduleHeaderUpdate, {passive:true});
 window.addEventListener('resize', scheduleHeaderUpdate, {passive:true});
 siteHeader.addEventListener('focusout', scheduleHeaderUpdate);
 updateMobileHeader();
-document.documentElement.classList.remove('large-text');
 // All fitted sections reserve both rows of the mobile bottom dock.
 window.pa05BottomInset=()=>{
  const nav=siteHeader.querySelector('nav'),help=document.querySelector('.mobile-help');
