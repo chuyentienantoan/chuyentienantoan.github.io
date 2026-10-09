@@ -884,192 +884,96 @@ html:not(.js) #cam-nang .chapter{margin-block:8px}
 
 /* === utility-fit.css === */
 /* Full content, fitted between the header and the mobile bottom dock. */
-#can-ho-tro,#tai-tai-lieu{scroll-margin-top:0;padding-block:12px;min-height:0}
-.js #can-ho-tro,.js #tai-tai-lieu{height:calc(100dvh - var(--utility-header-height,65px) - var(--utility-bottom-height,0px))}
-#can-ho-tro .help-panel{height:100%;min-height:0;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:16px;padding:20px;border-radius:18px}
-#can-ho-tro .help-heading .eyebrow{display:inline-block;margin:0 0 6px;padding:5px 0 5px 12px;border-left:4px solid #b6e5d5;font-size:14px;line-height:1.25;letter-spacing:.06em}
-#can-ho-tro h2{font-size:28px;line-height:1.25}
-#can-ho-tro .help-heading p:not(.eyebrow){margin-top:6px;font-size:16px;line-height:1.4}
-#can-ho-tro .help-steps{min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:repeat(2,minmax(0,1fr));gap:16px 24px;margin:0}
-#can-ho-tro .help-steps li{min-height:0;align-items:center;gap:12px;padding:12px;border:1px solid #668e86;border-radius:12px;background:#ffffff08}
-#can-ho-tro .help-steps li>span{flex-basis:32px;height:32px;font-size:16px}
-#can-ho-tro .help-steps h3{margin:0 0 6px;font-size:20px;line-height:1.3}
-#can-ho-tro .help-steps p{font-size:18px;line-height:1.45}
-#can-ho-tro .help-warning{margin:0;padding:10px 14px;font-size:17px;line-height:1.35;border-radius:10px}
+#can-ho-tro,#tai-tai-lieu{scroll-margin-top:calc(var(--utility-header-height,65px) + 8px);padding-block:16px;min-height:0;box-sizing:border-box}
+.js #can-ho-tro,.js #tai-tai-lieu{min-height:calc(100dvh - var(--utility-header-height,65px) - var(--utility-bottom-height,0px));height:auto}
+html:not(.js) #can-ho-tro,html:not(.js) #tai-tai-lieu{height:auto;min-height:auto}
+
+/* #can-ho-tro: Cần hỗ trợ / Nghi bị lừa đảo */
+#can-ho-tro .help-panel{height:auto;min-height:100%;width:100%;max-width:1080px;margin-inline:auto;box-sizing:border-box;display:flex;flex-direction:column;gap:16px;padding:24px;border-radius:18px;background:linear-gradient(135deg,#f0f8f7,#f8fbff);color:#173942;border:1px solid #d6e8e5;box-shadow:0 8px 28px #17394208}
+#can-ho-tro .help-heading{flex:0 0 auto}
+#can-ho-tro .help-heading .eyebrow{display:inline-block;margin:0 0 6px;padding:5px 0 5px 12px;border-left:4px solid #238879;color:#14665d;font-size:14px;line-height:1.25;letter-spacing:.06em}
+#can-ho-tro h2{font-size:26px;line-height:1.25;color:#123d48;margin:0}
+#can-ho-tro .help-heading p:not(.eyebrow){margin-top:6px;font-size:16px;line-height:1.4;color:#4e636b}
+#can-ho-tro .help-steps{flex:1 0 auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 20px;margin:0;padding:0;list-style:none}
+#can-ho-tro .help-steps li{display:flex;align-items:flex-start;gap:14px;padding:16px;border:1px solid #dce7eb;border-radius:14px;background:#fff;box-shadow:0 2px 6px #17394204;box-sizing:border-box;min-height:auto}
+#can-ho-tro .help-steps li>span{display:grid;place-items:center;flex:0 0 36px;width:36px;height:36px;font-size:16px;font-weight:800;border-radius:10px;border:0;margin-top:2px;color:#14665d;background:#e6f4ef}
+#can-ho-tro .help-steps li:nth-child(2)>span{color:#235a9b;background:#eaf2ff}
+#can-ho-tro .help-steps li:nth-child(3)>span{color:#785027;background:#fff3df}
+#can-ho-tro .help-steps li:nth-child(4)>span{color:#675197;background:#f0ecfa}
+#can-ho-tro .help-steps h3{margin:0 0 4px;font-size:18px;font-weight:700;line-height:1.3;color:#123d48}
+#can-ho-tro .help-steps p{margin:0;font-size:15px;line-height:1.48;color:#405963}
+#can-ho-tro .help-warning{flex:0 0 auto;margin:0;padding:12px 16px;font-size:15px;font-weight:700;line-height:1.35;border-radius:11px;background:#fff2df;border:1px solid #ebcd9f;color:#7b4516}
+
+/* #tai-tai-lieu: Tải tài liệu */
 #tai-tai-lieu{display:grid;grid-template-rows:auto minmax(0,1fr);gap:12px}
 #tai-tai-lieu .section-heading{display:block;margin:0}
 #tai-tai-lieu .eyebrow{display:inline-block;margin:0 0 6px;padding:5px 0 5px 12px;border-left:4px solid #814525;font-size:14px;line-height:1.25;letter-spacing:.06em}
 #tai-tai-lieu h2{font-size:24px;line-height:1.3}
 #tai-tai-lieu .section-heading p:not(.eyebrow){font-size:16px;line-height:1.4;margin-top:6px}
-#tai-tai-lieu .downloads{min-height:0;gap:18px;grid-template-columns:1fr 1fr}
-#tai-tai-lieu .download-card{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;min-height:0;gap:12px;padding:24px;align-items:start;justify-items:start}
+#tai-tai-lieu .downloads{min-height:0;gap:18px;grid-template-columns:1fr 1fr;align-items:stretch}
+#tai-tai-lieu .download-card{display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;min-height:0;gap:12px;padding:24px;align-items:start;justify-items:start;background:#fff;border:1px solid #d5e5e1;border-top:4px solid #278676;box-shadow:0 5px 20px #17394207;border-radius:14px}
+#tai-tai-lieu .download-card:nth-child(2){border-color:#dbe2ef;border-top-color:#5475ae}
+#tai-tai-lieu .download-card:nth-child(2) .file-tag{background:#edf2fc;color:#355785}
+#tai-tai-lieu .download-card:nth-child(2) .button{background:#355b90;border-color:#355b90;color:#fff}
+#tai-tai-lieu .download-card:nth-child(2) .button:hover{background:#284873}
 #tai-tai-lieu .file-tag{margin:0;font-size:14px;line-height:1.3;letter-spacing:.04em;padding:6px 10px;border-radius:7px;background:#e5f1ec}
-#tai-tai-lieu .download-card h3{font-size:23px;line-height:1.3}
-#tai-tai-lieu .download-card p{font-size:18px;line-height:1.45;margin:0}
-#tai-tai-lieu .download-card .button{margin:0;min-height:48px;align-self:end;font-size:16px}
-@media(max-width:800px),(max-width:1000px) and (hover:none) and (pointer:coarse){
- .site-header .brand{justify-content:center;width:100%;text-align:center}
- #can-ho-tro .help-panel{padding:12px;gap:10px;border-radius:14px}
- #can-ho-tro h2{font-size:22px}
- #can-ho-tro .help-heading p:not(.eyebrow){font-size:14px;margin-top:4px}
- #can-ho-tro .help-steps{grid-template-columns:1fr;grid-template-rows:repeat(4,minmax(0,1fr));gap:7px}
- #can-ho-tro .help-steps li{padding:7px 9px;gap:9px;border-radius:9px}
- #can-ho-tro .help-steps li>span{flex-basis:26px;height:26px;font-size:14px}
- #can-ho-tro .help-steps h3{font-size:17px;line-height:1.3;margin-bottom:4px}
- #can-ho-tro .help-steps p{font-size:15px;line-height:1.4}
- #can-ho-tro .help-warning{padding:8px 10px;font-size:14px}
- #tai-tai-lieu h2{font-size:22px}
- #tai-tai-lieu .section-heading p:not(.eyebrow){font-size:14px}
- #tai-tai-lieu .downloads{grid-template-columns:1fr;grid-template-rows:repeat(2,minmax(0,1fr));gap:10px}
- #tai-tai-lieu .download-card{gap:8px;padding:14px;border-radius:12px}
- #tai-tai-lieu .file-tag{font-size:12px;padding:4px 8px}
- #tai-tai-lieu .download-card h3{font-size:18px}
- #tai-tai-lieu .download-card p{font-size:15px;line-height:1.4}
- #tai-tai-lieu .download-card .button{min-height:44px;padding:8px 12px;font-size:15px}
-}
-@media(max-height:650px){
- #can-ho-tro,#tai-tai-lieu{padding-block:8px}
- #can-ho-tro .help-panel{padding:10px;gap:8px}
- #can-ho-tro h2{font-size:21px}
- #can-ho-tro .help-heading .eyebrow{font-size:12px;margin-bottom:4px}
- #can-ho-tro .help-steps{gap:5px}
- #can-ho-tro .help-steps li{padding:5px 7px;gap:7px}
- #can-ho-tro .help-steps h3{font-size:15px;margin-bottom:2px}
- #can-ho-tro .help-steps p{font-size:13px;line-height:1.3}
- #can-ho-tro .help-warning{font-size:13px;padding:6px 8px}
- #tai-tai-lieu{gap:8px}
- #tai-tai-lieu h2{font-size:20px}
- #tai-tai-lieu .section-heading p:not(.eyebrow){font-size:13px;margin-top:4px}
- #tai-tai-lieu .download-card{padding:10px;gap:6px}
- #tai-tai-lieu .download-card h3{font-size:16px}
- #tai-tai-lieu .download-card p{font-size:13px;line-height:1.3}
- #tai-tai-lieu .file-tag{font-size:11px;padding:3px 6px}
- #tai-tai-lieu .download-card .button{min-height:44px;font-size:14px;padding:7px 10px}
-}
-@media(min-width:601px) and (max-height:520px){
- #can-ho-tro .help-steps{grid-template-columns:1fr 1fr;grid-template-rows:repeat(2,minmax(0,1fr))}
- #tai-tai-lieu .downloads{grid-template-columns:1fr 1fr;grid-template-rows:minmax(0,1fr)}
- #can-ho-tro .help-heading p:not(.eyebrow){font-size:13px}
- #can-ho-tro .help-heading .eyebrow{margin-bottom:2px}
- #can-ho-tro h2{font-size:19px}
- #can-ho-tro .help-steps li>span{flex-basis:22px;height:22px;font-size:12px}
- #can-ho-tro .help-steps p{font-size:12px;line-height:1.25}
-}
-@media(min-width:801px) and (hover:hover) and (pointer:fine){
+#tai-tai-lieu .download-card h3{font-size:23px;line-height:1.3;max-width:28ch}
+#tai-tai-lieu .download-card p{font-size:16px;line-height:1.45;margin:0;color:#405963;width:100%;text-align:justify;text-justify:inter-word;text-align-last:left}
+#tai-tai-lieu .download-card .button{margin:0;min-height:48px;align-self:end;font-size:16px;border-radius:10px}
+
+/* Large desktop enhancement */
+@media(min-width:801px) and (min-height:651px) and (hover:hover) and (pointer:fine){
  #can-ho-tro h2{font-size:28px}
  #can-ho-tro .help-steps h3{font-size:20px}
- #can-ho-tro .help-steps p{font-size:18px;line-height:1.45}
- #can-ho-tro .help-warning{font-size:17px}
- #tai-tai-lieu .download-card h3{font-size:23px}
- #tai-tai-lieu .download-card p{font-size:18px;line-height:1.45}
- #tai-tai-lieu .download-card .button{font-size:16px}
+ #can-ho-tro .help-steps p{font-size:16px;line-height:1.5}
+ #tai-tai-lieu .download-card{grid-template-rows:minmax(40px,1fr) auto auto auto auto;gap:14px}
+ #tai-tai-lieu .download-card::before{content:"";width:100%;height:100%;min-height:0;border-radius:12px;background:#edf6f2 url('../images/book/01-view.webp') center / auto 90% no-repeat}
+ #tai-tai-lieu .download-card:nth-child(2)::before{background-color:#f0f3fa;background-image:url('../images/thumbs/01.webp'),url('../images/thumbs/07.webp'),url('../images/thumbs/15.webp');background-position:22% center,50% center,78% center;background-size:auto 85%}
 }
-html:not(.js) #can-ho-tro,html:not(.js) #tai-tai-lieu{height:auto}
-@media(max-width:600px) and (max-height:650px){
- #can-ho-tro .help-panel{padding:8px;gap:7px}
- #can-ho-tro .help-heading .eyebrow{padding-block:3px;margin-bottom:2px}
+
+/* Tablet & Mobile responsive */
+@media(max-width:800px),(max-width:1000px) and (hover:none) and (pointer:coarse){
+ .site-header .brand{justify-content:center;width:100%;text-align:center}
+ #can-ho-tro .help-panel{padding:16px;gap:12px;border-radius:16px}
+ #can-ho-tro h2{font-size:22px}
+ #can-ho-tro .help-heading p:not(.eyebrow){font-size:14px;margin-top:4px}
+ #can-ho-tro .help-steps{grid-template-columns:1fr;gap:10px}
+ #can-ho-tro .help-steps li{padding:12px 14px;gap:12px;border-radius:12px}
+ #can-ho-tro .help-steps li>span{flex:0 0 32px;width:32px;height:32px;font-size:15px;border-radius:8px}
+ #can-ho-tro .help-steps h3{font-size:16.5px;line-height:1.3;margin-bottom:3px}
+ #can-ho-tro .help-steps p{font-size:14px;line-height:1.45}
+ #can-ho-tro .help-warning{padding:10px 12px;font-size:14px;border-radius:10px}
+ #tai-tai-lieu h2{font-size:22px}
+ #tai-tai-lieu .section-heading p:not(.eyebrow){font-size:14px}
+ #tai-tai-lieu .downloads{grid-template-columns:1fr;grid-template-rows:auto auto;gap:10px}
+ #tai-tai-lieu .download-card{gap:8px;padding:14px;border-radius:12px;border-top-width:3px}
+ #tai-tai-lieu .file-tag{font-size:12px;padding:4px 8px}
+ #tai-tai-lieu .download-card h3{font-size:18px}
+ #tai-tai-lieu .download-card p{font-size:14.5px;line-height:1.4}
+ #tai-tai-lieu .download-card .button{min-height:44px;padding:8px 12px;font-size:15px}
+}
+
+/* Small mobile devices */
+@media(max-width:480px){
+ #can-ho-tro .help-panel{padding:12px;gap:10px;border-radius:14px}
  #can-ho-tro h2{font-size:20px}
- #can-ho-tro .help-heading p:not(.eyebrow){font-size:12px;line-height:1.3;margin-top:2px}
- #can-ho-tro .help-steps{gap:3px}
- #can-ho-tro .help-steps li{position:relative;display:block;padding:4px 6px}
- #can-ho-tro .help-steps li>span{position:absolute;top:4px;left:6px;width:22px;height:22px;font-size:12px}
- #can-ho-tro .help-steps h3{margin:0 0 2px 28px;font-size:14px;line-height:1.25}
- #can-ho-tro .help-steps p{font-size:12.5px;line-height:1.25}
- #can-ho-tro .help-warning{font-size:12px;line-height:1.3;padding:6px 8px}
+ #can-ho-tro .help-steps{gap:8px}
+ #can-ho-tro .help-steps li{padding:10px 12px;gap:10px;border-radius:10px}
+ #can-ho-tro .help-steps li>span{flex:0 0 28px;width:28px;height:28px;font-size:13px;border-radius:7px}
+ #can-ho-tro .help-steps h3{font-size:15.5px}
+ #can-ho-tro .help-steps p{font-size:13.5px;line-height:1.4}
+ #can-ho-tro .help-warning{padding:8px 10px;font-size:13px;border-radius:8px}
 }
-/* Longer document summaries, justified with a natural last line. */
-#tai-tai-lieu .download-card p{width:100%;text-align:justify;text-justify:inter-word;text-align-last:left}
-@media(max-width:800px){
- #tai-tai-lieu .download-card{padding:12px;gap:6px}
- #tai-tai-lieu .download-card p{font-size:14px;line-height:1.4}
-}
-@media(max-width:600px) and (max-height:650px){
- #tai-tai-lieu .downloads{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;padding:2px 2px 6px;gap:10px}
- #tai-tai-lieu .download-card{flex:0 0 calc(100% - 18px);height:100%;scroll-snap-align:start;padding:10px;gap:6px}
- #tai-tai-lieu .download-card p{font-size:13px;line-height:1.35}
-}
-/* A low landscape viewport gives the document summary a wide reading area. */
-@media(min-width:601px) and (max-height:520px) and (hover:none) and (pointer:coarse){
+
+/* Landscape on small height phones */
+@media(min-width:601px) and (max-height:520px){
+ #can-ho-tro .help-steps{grid-template-columns:1fr 1fr;gap:10px}
+ #can-ho-tro .help-steps li{padding:10px 12px;gap:10px}
+ #can-ho-tro .help-steps li>span{flex:0 0 28px;width:28px;height:28px;font-size:13px}
+ #can-ho-tro .help-steps p{font-size:13px;line-height:1.35}
  #tai-tai-lieu{grid-template-columns:minmax(150px,.75fr) minmax(0,2fr);grid-template-rows:minmax(0,1fr);gap:12px}
  #tai-tai-lieu .section-heading{align-self:start}
  #tai-tai-lieu .downloads{display:flex;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scrollbar-width:thin;padding:2px 2px 6px;gap:10px}
  #tai-tai-lieu .download-card{flex:0 0 calc(100% - 18px);height:100%;scroll-snap-align:start;padding:10px;gap:6px}
  #tai-tai-lieu .download-card p{font-size:13px;line-height:1.35}
-}
-/* V33: light, compact utility panels; space belongs around content, not inside cards. */
-#can-ho-tro .help-panel{height:auto;max-width:1040px;margin-inline:auto;grid-template-rows:auto auto auto;background:linear-gradient(135deg,#f0f8f7,#f8fbff);color:#173942;border:1px solid #d6e8e5;box-shadow:0 8px 28px #17394208}
-#can-ho-tro .help-heading .eyebrow{color:#14665d;border-color:#238879}
-#can-ho-tro .help-heading p:not(.eyebrow){color:#4e636b}
-#can-ho-tro .help-steps{grid-template-rows:repeat(2,auto);gap:12px}
-#can-ho-tro .help-steps li{align-items:flex-start;padding:18px;background:#fff;border:1px solid #dce7eb;border-radius:12px;box-shadow:0 2px 6px #17394204}
-#can-ho-tro .help-steps li>span{color:#14665d;background:#e6f4ef;border:0;border-radius:9px}
-#can-ho-tro .help-steps li:nth-child(2)>span{color:#235a9b;background:#eaf2ff}
-#can-ho-tro .help-steps li:nth-child(3)>span{color:#785027;background:#fff3df}
-#can-ho-tro .help-steps li:nth-child(4)>span{color:#675197;background:#f0ecfa}
-#can-ho-tro .help-steps p{color:#405963}
-#can-ho-tro .help-warning{background:#fff2df;border:1px solid #ebcd9f;color:#7b4516}
-#tai-tai-lieu{grid-template-rows:auto auto;align-content:start}
-#tai-tai-lieu .downloads{align-items:stretch}
-#tai-tai-lieu .download-card{background:#fff;border:1px solid #d5e5e1;border-top:4px solid #278676;box-shadow:0 5px 20px #17394207;gap:14px;padding:24px}
-#tai-tai-lieu .download-card:nth-child(2){border-color:#dbe2ef;border-top-color:#5475ae}
-#tai-tai-lieu .download-card:nth-child(2) .file-tag{background:#edf2fc;color:#355785}
-#tai-tai-lieu .download-card h3{max-width:28ch}
-#tai-tai-lieu .download-card p{color:#405963}
-#tai-tai-lieu .download-card .button{border-radius:10px}
-#tai-tai-lieu .download-card:nth-child(2) .button{background:#355b90;border-color:#355b90;color:#fff}
-#tai-tai-lieu .download-card:nth-child(2) .button:hover{background:#284873}
-@media(max-width:800px),(max-width:1000px) and (hover:none) and (pointer:coarse){
- #can-ho-tro .help-panel{padding:12px;gap:10px}
- #can-ho-tro .help-steps{grid-template-rows:repeat(4,auto);gap:8px}
- #can-ho-tro .help-steps li{padding:10px;gap:10px}
- #tai-tai-lieu .download-card{padding:12px;gap:6px;border-top-width:3px}
- #tai-tai-lieu .downloads{grid-template-rows:auto auto}
-}
-@media(max-height:650px){
- #can-ho-tro .help-panel{padding:10px;gap:8px}
- #can-ho-tro .help-steps{gap:6px}
- #can-ho-tro .help-steps li{padding:8px}
- #tai-tai-lieu .download-card{padding:12px;gap:8px}
-}
-@media(max-width:600px) and (max-height:650px){
- #can-ho-tro .help-panel{padding:8px;gap:7px}
- #can-ho-tro .help-steps{gap:3px}
- #can-ho-tro .help-steps li{padding:4px 6px}
- #tai-tai-lieu{grid-template-rows:auto minmax(0,1fr)}
- #tai-tai-lieu .download-card{padding:10px;gap:6px}
-}
-@media(min-width:601px) and (max-height:520px){
- #can-ho-tro .help-steps{grid-template-rows:repeat(2,auto)}
- #can-ho-tro .help-steps li{padding:5px 7px}
-}
-@media(min-width:601px) and (max-height:520px) and (hover:none) and (pointer:coarse){
- #tai-tai-lieu{grid-template-rows:minmax(0,1fr)}
- #tai-tai-lieu .download-card{padding:10px;gap:6px}
-}
-/* V34: use the full section canvas, with the same width as adjacent sections. */
-#can-ho-tro .help-panel{height:100%;width:100%;max-width:none;grid-template-rows:auto minmax(0,1fr) auto}
-#can-ho-tro .help-steps{grid-template-rows:repeat(2,minmax(0,1fr))}
-#can-ho-tro .help-steps li{align-items:center}
-#tai-tai-lieu{grid-template-rows:auto minmax(0,1fr)}
-#tai-tai-lieu .download-card{grid-template-rows:auto auto minmax(0,1fr) auto}
-@media(min-width:801px) and (min-height:651px) and (hover:hover) and (pointer:fine){
- #can-ho-tro .help-panel{padding:24px;gap:20px}
- #can-ho-tro .help-steps{gap:16px}
- #can-ho-tro .help-steps li{padding:24px;gap:20px}
- #can-ho-tro .help-steps li>span{flex-basis:52px;height:52px;font-size:24px;border-radius:15px}
- #can-ho-tro .help-steps h3{font-size:24px;margin-bottom:10px}
- #can-ho-tro .help-steps p{font-size:20px;line-height:1.55;max-width:40ch}
- #tai-tai-lieu .download-card{grid-template-rows:minmax(40px,1fr) auto auto auto auto;gap:14px}
- #tai-tai-lieu .download-card::before{content:"";width:100%;height:100%;min-height:0;border-radius:12px;background:#edf6f2 url('../images/book/01-view.webp') center / auto 90% no-repeat}
- #tai-tai-lieu .download-card:nth-child(2)::before{background-color:#f0f3fa;background-image:url('../images/thumbs/01.webp'),url('../images/thumbs/07.webp'),url('../images/thumbs/15.webp');background-position:22% center,50% center,78% center;background-size:auto 85%}
-}
-@media(max-width:800px),(max-width:1000px) and (hover:none) and (pointer:coarse){
- #can-ho-tro .help-steps{grid-template-rows:repeat(4,minmax(0,1fr))}
- #tai-tai-lieu .downloads{grid-template-rows:repeat(2,minmax(0,1fr))}
-}
-@media(min-width:601px) and (max-height:520px){
- #can-ho-tro .help-steps{grid-template-rows:repeat(2,minmax(0,1fr))}
-}
-@media(min-width:601px) and (max-height:520px) and (hover:none) and (pointer:coarse){
- #tai-tai-lieu{grid-template-rows:minmax(0,1fr)}
 }
