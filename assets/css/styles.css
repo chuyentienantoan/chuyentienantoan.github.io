@@ -1,8 +1,8 @@
 /* Vietnamese font is bundled with the website; no font service required. */
 @font-face{font-family:"PA05 Noto Sans";src:url("../fonts/noto-sans-variable.woff2") format("woff2"),url("../fonts/noto-sans-variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
-:root{color-scheme:light;--ink:#173942;--muted:#4e636b;--teal:#14665d;--navy:#123d48;--paper:#fff;--soft:#f3f7f5;--line:#d8e3df;--radius:20px;font-size:18px}
+:root{color-scheme:light;--ink:#0f172a;--muted:#475569;--teal:#059669;--teal-light:#10b981;--navy:#0f2438;--navy-dark:#0a192f;--accent-gold:#d97706;--accent-blue:#2563eb;--paper:#fff;--soft:#f8fafc;--line:#cbd5e1;--radius:18px;font-size:18px}
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:110px}
+html{scrollbar-gutter:stable;scroll-behavior:smooth;scroll-padding-top:110px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"PA05 Noto Sans",Arial,sans-serif;font-weight:400;line-height:1.65}
 body.modal-open{overflow:hidden}
 a{color:var(--teal);text-underline-offset:4px}
@@ -16,7 +16,7 @@ h1,h2,h3{line-height:1.35;letter-spacing:-.015em}
 h1{font-size:clamp(2.25rem,4.1vw,3.1rem);font-weight:800}
 h2{font-size:clamp(1.65rem,3vw,2.35rem)}
 h3{font-size:1.12rem}
-button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,.viewer-content:focus-visible{outline:3px solid #a14c12;outline-offset:5px}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,.viewer-content:focus-visible{outline:2.5px solid var(--teal-light);outline-offset:3px;box-shadow:0 0 0 4px rgba(16,185,129,0.2)}
 [hidden]{display:none!important}
 .js-only{display:none!important}
 .js .js-only{display:flex!important}
@@ -25,28 +25,37 @@ button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,.
 .header-inner>*,.hero-grid>*,.section-heading>*,.chapter summary>span:nth-child(2),.poster-info,.viewer-header>div{min-width:0}
 .skip-link{position:fixed;left:16px;top:-100px;z-index:20;padding:12px 20px;background:white;border:2px solid var(--teal);border-radius:8px}
 .skip-link:focus{top:12px}
-.site-header{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.98);border-bottom:1px solid var(--line)}
-.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:100px;padding-block:18px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);font-size:1.08rem;font-weight:750;line-height:1.3}
-.brand-icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px}
+.site-header{position:sticky;top:0;z-index:5;background:#ffffff;border-bottom:1px solid rgba(203,213,225,0.8);box-shadow:0 2px 10px rgba(15,23,42,0.04);transition:padding .2s ease,background .2s ease}
+@media(min-width:801px){.site-header{background:rgba(255,255,255,0.92);backdrop-filter:blur(16px) saturate(180%);-webkit-backdrop-filter:blur(16px) saturate(180%)}}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:92px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--navy);font-size:1.08rem;font-weight:750;line-height:1.3;transition:transform .15s ease}
+.brand:hover{transform:scale(1.02)}
+.brand:active{transform:scale(0.98)}
+.brand-icon{display:grid;place-items:center;flex:0 0 52px;width:52px;height:52px;transition:transform .2s ease}
+.brand:hover .brand-icon{transform:rotate(-3deg) scale(1.05)}
 .brand-icon img{display:block;width:100%;height:100%;object-fit:contain}
 .brand-sub{display:block;font-size:.88rem;font-weight:600;margin-top:4px}
-nav{display:flex;gap:26px;flex-wrap:wrap}
-nav a{display:flex;align-items:center;min-height:48px;color:var(--ink);font-size:.95rem;text-decoration:none;font-weight:700}
-nav a:hover{color:var(--teal);text-decoration:underline}
-.hero{background:linear-gradient(125deg,#f2f8f5 0%,#e8f2ee 60%,#f7f2e8 100%);padding-block:68px 78px;overflow:hidden}
+nav{display:flex;gap:12px;flex-wrap:wrap}
+@media(min-width:801px){
+  nav a{display:flex;align-items:center;min-height:42px;padding:6px 14px;color:var(--ink);font-size:.95rem;text-decoration:none;font-weight:700;border-radius:10px;transition:all .15s cubic-bezier(0.4,0,0.2,1)}
+  nav a:hover{color:var(--teal);background:rgba(16,185,129,0.12);transform:translateY(-1.5px);text-decoration:none}
+  nav a:active{transform:scale(0.95) translateY(1px)}
+}
+.hero{background:radial-gradient(circle at 80% 20%,rgba(16,185,129,0.12) 0%,transparent 45%),radial-gradient(circle at 10% 70%,rgba(59,130,246,0.08) 0%,transparent 40%),linear-gradient(135deg,#f8fafc 0%,#f1f5f9 50%,#eff6ff 100%);padding-block:68px 78px;overflow:hidden}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-items:center;gap:64px}
 .eyebrow{font-size:.8rem;letter-spacing:.12em;font-weight:800;color:var(--teal);margin-bottom:16px}
 .hero h1 span{color:var(--teal)}
 .hero-intro{font-size:1.1rem;font-weight:700;margin-top:25px;max-width:640px}
 .hero-description{margin-top:18px;color:var(--muted);max-width:610px}
 .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:32px}
-.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:13px 21px;min-height:50px;background:var(--teal);border:1px solid transparent;color:white;border-radius:12px;font-size:1rem;font-weight:700;line-height:1.4;text-decoration:none;text-align:center}
-.button:hover{background:#0d5048;text-decoration:none}
-.button.secondary{background:white;color:var(--navy);border-color:#b9cec6}
-.button.secondary:hover{background:#edf5f2}
-.button.small{padding:10px 15px;font-size:.95rem;min-height:48px}
-.button:disabled{background:#edf1ef;color:#586970;border-color:#d0dad6;cursor:default}
+.button{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:13px 22px;min-height:50px;background:linear-gradient(135deg,#059669 0%,#10b981 100%);border:1px solid rgba(255,255,255,0.25);color:white;border-radius:12px;font-size:1rem;font-weight:700;line-height:1.4;text-decoration:none;text-align:center;box-shadow:0 4px 14px rgba(5,150,105,0.3);transition:transform 0.15s cubic-bezier(0.4,0,0.2,1),box-shadow 0.15s ease,filter 0.15s ease;cursor:pointer}
+.button:hover{background:linear-gradient(135deg,#047857 0%,#059669 100%);transform:translateY(-2px);box-shadow:0 8px 22px rgba(5,150,105,0.42);text-decoration:none;filter:brightness(1.04)}
+.button:active{transform:scale(0.96) translateY(1px);box-shadow:0 2px 6px rgba(5,150,105,0.3)}
+.button.secondary{background:white;color:var(--navy);border:1.5px solid #94a3b8;box-shadow:0 2px 8px rgba(15,23,42,0.06)}
+.button.secondary:hover{background:#f8fafc;border-color:var(--teal);color:var(--teal);transform:translateY(-2px);box-shadow:0 6px 18px rgba(15,23,42,0.1)}
+.button.secondary:active{transform:scale(0.96) translateY(1px);background:#f1f5f9}
+.button.small{padding:9px 16px;font-size:.92rem;min-height:44px}
+.button:disabled{background:#e2e8f0;color:#94a3b8;border-color:#cbd5e1;box-shadow:none;transform:none;cursor:not-allowed}
 .hero-meta{margin-top:22px;font-size:.9rem;color:var(--muted)}
 .book-cover{display:block;position:relative;width:min(100%,300px);margin:12px auto 0;border:9px solid white;background:white;border-radius:16px;box-shadow:0 22px 55px #133c4826;text-decoration:none}
 .book-cover:hover{transform:rotate(0)}
@@ -94,15 +103,17 @@ details[open]>summary .expand{transform:rotate(45deg)}
 input[type=search]{min-width:0;flex:1;padding:13px 16px;min-height:52px;border:1px solid #91aaa0;background:white;border-radius:12px;color:var(--ink);font-size:1rem}
 input::placeholder{color:#596c73;opacity:1}
 .filters{display:flex;gap:9px;flex-wrap:wrap;margin-top:8px}
-.filter{min-height:48px;padding:10px 15px;border:1px solid #b5cac0;background:white;border-radius:26px;color:var(--ink);font-size:.9rem;font-weight:700;line-height:1.4}
-.filter:hover{background:#e5f0ea}
-.filter[aria-pressed=true]{background:var(--navy);color:white;border-color:var(--navy)}
+.filter{min-height:44px;padding:9px 18px;border:1.5px solid #cbd5e1;background:white;border-radius:26px;color:var(--ink);font-size:.9rem;font-weight:700;line-height:1.4;box-shadow:0 1px 3px rgba(15,23,42,0.06);transition:all 0.15s cubic-bezier(0.4,0,0.2,1);cursor:pointer}
+.filter:hover{background:#ecfdf5;border-color:var(--teal-light);color:var(--teal);transform:translateY(-1.5px);box-shadow:0 4px 12px rgba(16,185,129,0.18)}
+.filter:active{transform:scale(0.96) translateY(1px)}
+.filter[aria-pressed=true]{background:linear-gradient(135deg,#0f2438 0%,#1e293b 100%);color:white;border-color:#0f2438;box-shadow:0 4px 12px rgba(15,36,56,0.28)}
 .result-count{font-size:.92rem;color:var(--muted);margin-top:5px}
 .poster-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.poster-card{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;scroll-margin-top:125px;display:flex;flex-direction:column}
-.poster-preview{display:block;background:#e7eeea;padding:16px;overflow:hidden}
-.poster-preview img{width:100%;border-radius:5px;box-shadow:0 4px 14px #17394217;transition:transform .2s ease}
-.poster-preview:hover img{transform:scale(1.015)}
+.poster-card{background:white;border:1.5px solid var(--line);border-radius:18px;overflow:hidden;scroll-margin-top:125px;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(15,23,42,0.05);transition:transform 0.25s cubic-bezier(0.16,1,0.3,1),box-shadow 0.25s ease,border-color 0.25s ease}
+.poster-card:hover{transform:translateY(-5px);border-color:var(--teal-light);box-shadow:0 16px 32px -4px rgba(15,23,42,0.12),0 0 0 1px var(--teal-light)}
+.poster-preview{display:block;background:linear-gradient(135deg,#edf6f2 0%,#f1f5f9 100%);padding:16px;overflow:hidden;cursor:pointer}
+.poster-preview img{width:100%;border-radius:6px;box-shadow:0 4px 14px rgba(15,23,42,0.08);transition:transform 0.25s cubic-bezier(0.16,1,0.3,1)}
+.poster-preview:hover img{transform:scale(1.025)}
 .poster-info{padding:23px;display:flex;flex-direction:column;flex:1}
 .poster-label{font-size:.78rem;font-weight:800;color:var(--teal);line-height:1.5;margin-bottom:10px}
 .poster-label span{font-weight:600;color:var(--muted)}

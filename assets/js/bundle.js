@@ -743,10 +743,27 @@ window.addEventListener('afterprint', () => { printState.forEach(([chapter, open
  content.addEventListener('click',event=>{
   const link=event.target.closest('a');
   if(!link)return;
-  dialog.close();
   if(link.dataset.view){
-   const original=section.querySelector(`[data-view="${link.dataset.view}"][data-index="${link.dataset.index}"]`);
-   if(original)original.click();
+   event.preventDefault();
+   const original=document.querySelector(`[data-view="${link.dataset.view}"][data-index="${link.dataset.index}"]`);
+   dialog.close();
+   if(original){
+    requestAnimationFrame(()=>original.click());
+   }
+   return;
+  }
+  const href=link.getAttribute('href');
+  if(href&&href.startsWith('#')){
+   event.preventDefault();
+   dialog.close();
+   const target=document.querySelector(href);
+   if(target){
+    requestAnimationFrame(()=>{
+     target.scrollIntoView({behavior:'smooth'});
+     target.focus?.({preventScroll:true});
+    });
+   }
+   return;
   }
  });
  window.addEventListener('beforeprint',()=>{if(dialog.open)dialog.close();});
