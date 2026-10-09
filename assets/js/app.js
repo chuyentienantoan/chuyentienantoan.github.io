@@ -28,14 +28,16 @@ function playMoneyIntro() {
     {fill:'#b1dce3',ink:'#1c6277',edge:'#628f9b',value:'500.000 ₫'}
   ];
   const symbols = palettes.map((color,index) => `<symbol id="intro-dong-${index}" viewBox="0 0 160 78"><rect x="2" y="2" width="156" height="74" rx="5" fill="${color.fill}" stroke="${color.ink}" stroke-width="1.5"/><rect x="7" y="7" width="146" height="64" rx="3" fill="none" stroke="${color.ink}" stroke-opacity=".45"/><path d="M12 17h78M12 21h60M12 63h82M12 67h69" stroke="${color.ink}" stroke-opacity=".3"/><ellipse cx="123" cy="39" rx="24" ry="27" fill="none" stroke="${color.ink}" stroke-opacity=".28"/><ellipse cx="123" cy="39" rx="19" ry="22" fill="none" stroke="${color.ink}" stroke-opacity=".2"/><text x="14" y="34" class="money-country" fill="${color.ink}">VIỆT NAM ĐỒNG</text><text x="13" y="54" class="money-value" fill="${color.ink}">${color.value}</text><text x="123" y="49" class="money-mark" fill="${color.ink}" text-anchor="middle">₫</text><text x="15" y="65" class="money-model" fill="${color.ink}">MÔ PHỎNG</text></symbol>`).join('');
-  layer.innerHTML = `<svg class="intro-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs>${symbols}</defs></svg><span class="shield-aura"></span><div class="shield-stage"><div class="shield-solid"><span class="shield-depth depth-back"></span><span class="shield-depth depth-middle"></span><span class="shield-depth depth-edge"></span><svg class="shield-face" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="intro-shield-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2bc"/><stop offset=".42" stop-color="#c8a85c"/><stop offset=".7" stop-color="#fff1bd"/><stop offset="1" stop-color="#8f713b"/></linearGradient><linearGradient id="intro-shield-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#348886"/><stop offset=".42" stop-color="#14665d"/><stop offset="1" stop-color="#123d48"/></linearGradient></defs><g class="shield-brand-mark" transform="translate(-12 -4) scale(1.78)"><path d="M52 15h8V9M56 25h10M16 15H9V9" fill="none" stroke="#80C9B7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="7" r="4" fill="#D5B46B"/><circle cx="66" cy="25" r="3.5" fill="#80C9B7"/><circle cx="9" cy="7" r="3.5" fill="#80C9B7"/><path d="M35 5 58 15v19c0 16-10 26-23 33C22 60 12 50 12 34V15L35 5Z" fill="url(#intro-shield-face)" stroke="url(#intro-shield-rim)" stroke-width="1.4"/><path d="M35 11 52 19v15c0 12-7 20-17 27-10-7-17-15-17-27V19l17-8Z" fill="none" stroke="#80C9B7" stroke-width="1.8"/><path d="M35 7 14 16v18c0 14 9 24 21 31Z" fill="#fff" opacity=".07"/><rect class="shield-brand-card" x="21" y="24" width="31" height="24" rx="4" fill="#F5FAF7"/><path d="M21 31h31" stroke="#123D48" stroke-width="4"/><rect x="25" y="37" width="8" height="6" rx="1.5" fill="#D5B46B"/><path d="M37 40h7" stroke="#14665D" stroke-width="2.3" stroke-linecap="round"/><circle cx="49" cy="48" r="12" fill="#14665D" stroke="#F5FAF7" stroke-width="2.5"/><path class="shield-brand-check" d="m43.5 48 3.5 3.5 7-8" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div></div>`;
+  layer.innerHTML = `<svg class="intro-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs>${symbols}</defs></svg><span class="shield-aura"></span><span class="shield-ground-shadow"></span><div class="shield-stage"><div class="shield-solid"><span class="shield-depth depth-back"></span><span class="shield-depth depth-middle"></span><span class="shield-depth depth-edge"></span><svg class="shield-face" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="intro-shield-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2bc"/><stop offset=".42" stop-color="#c8a85c"/><stop offset=".7" stop-color="#fff1bd"/><stop offset="1" stop-color="#8f713b"/></linearGradient><linearGradient id="intro-shield-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#348886"/><stop offset=".42" stop-color="#14665d"/><stop offset="1" stop-color="#123d48"/></linearGradient></defs><g class="shield-brand-mark" transform="translate(-12 -4) scale(1.78)"><path d="M52 15h8V9M56 25h10M16 15H9V9" fill="none" stroke="#80C9B7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="7" r="4" fill="#D5B46B"/><circle cx="66" cy="25" r="3.5" fill="#80C9B7"/><circle cx="9" cy="7" r="3.5" fill="#80C9B7"/><path d="M35 5 58 15v19c0 16-10 26-23 33C22 60 12 50 12 34V15L35 5Z" fill="url(#intro-shield-face)" stroke="url(#intro-shield-rim)" stroke-width="1.4"/><path d="M35 11 52 19v15c0 12-7 20-17 27-10-7-17-15-17-27V19l17-8Z" fill="none" stroke="#80C9B7" stroke-width="1.8"/><path d="M35 7 14 16v18c0 14 9 24 21 31Z" fill="#fff" opacity=".07"/><rect class="shield-brand-card" x="21" y="24" width="31" height="24" rx="4" fill="#F5FAF7"/><path d="M21 31h31" stroke="#123D48" stroke-width="4"/><rect x="25" y="37" width="8" height="6" rx="1.5" fill="#D5B46B"/><path d="M37 40h7" stroke="#14665D" stroke-width="2.3" stroke-linecap="round"/><circle cx="49" cy="48" r="12" fill="#14665D" stroke="#F5FAF7" stroke-width="2.5"/><path class="shield-brand-check" d="m43.5 48 3.5 3.5 7-8" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div></div><span class="shield-caption">LÁ CHẮN SỐ</span>`;
+  const noteFlights = [];
   let seed = 705;
   const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
   const lanes = [-.38,-.13,.13,.38];
   for (let arrowIndex = 0; arrowIndex < 4; arrowIndex++) {
     const size = mobile ? Math.min(44,width*.13) : 66;
     const step = size*.68, rise = size*.44;
-    const duration = 1570, delay = 280+arrowIndex*360;
+    // Preserve the first shot; the following three launch in a tight burst.
+    const duration = 1570, delay = [280,500,650,800][arrowIndex];
     const contactX=impactX+[-.025,.015,-.015,.025][arrowIndex]*shieldSize;
     const hitY = shieldY+lanes[arrowIndex]*shieldSize*.16-size*.245;
     const hitX = contactX-size*.9;
@@ -55,20 +57,23 @@ function playMoneyIntro() {
     const note = document.createElement('span'); note.className = 'money-note';
     note.dataset.slot=`${column},${row}`;
     note.innerHTML = `<span class="money-bill" data-value="${palettes[colorIndex].value}"><svg class="money-paper" viewBox="0 0 160 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><use href="#intro-dong-${colorIndex}"/></svg></span>`;
-    const points = [
-      [localX,localY,rotation],
-      [localX,localY,rotation],
-      [localX,localY,rotation],
-      [localX,localY,rotation],
-      [localX-size*(.3+random()*.25),localY-12,rotation+28],
-      [localX-size*(.65+random()*.5),localY+shieldSize*.55+random()*35,rotation+94],
-      [localX-size*(.9+random()*.8),height+size-hitY,rotation+245]
-    ];
-    points.forEach(([x,y,r],step)=>{
-      note.style.setProperty(`--x${step}`,`${Math.round(x)}px`);
-      note.style.setProperty(`--y${step}`,`${Math.round(y)}px`);
-      note.style.setProperty(`--r${step}`,`${r}deg`);
-    });
+    // One compositor animation per note: a continuous ballistic path and
+    // a gentle 3D tumble, prepared once rather than updated each frame.
+    const turn=(index%2?1:-1)*12;
+    const recoil=size*(1.8+random()*.9), kick=size*(3+random());
+    const fall=height+size-hitY-localY, spin=(index%2?1:-1)*(150+random()*90);
+    const transform=(x,y,r,yaw,pitch)=>`translate3d(${x.toFixed(3)}px,${y.toFixed(3)}px,0) rotateZ(${r.toFixed(3)}deg) rotateY(${yaw.toFixed(3)}deg) rotateX(${pitch.toFixed(3)}deg)`;
+    const start=transform(localX,localY,rotation,turn,7);
+    const frames=[{offset:0,transform:start,opacity:0},{offset:.03,transform:start,opacity:.97},{offset:.20,transform:start,opacity:.97}];
+    for(let sample=1;sample<=40;sample++){
+      const t=sample/40;
+      const x=localX-recoil*(1-Math.exp(-3*t))/(1-Math.exp(-3));
+      const y=localY-kick*t+(fall+kick)*t*t;
+      frames.push({offset:.20+.80*t,transform:transform(x,y,rotation+spin*t,turn+18*Math.sin(t*Math.PI*3),7+12*Math.sin(t*Math.PI*2)),opacity:t<.72?.97:.97*(1-t)/.28});
+    }
+    note.style.setProperty('--note-x',`${localX}px`);
+    note.style.setProperty('--note-y',`${localY}px`);
+    noteFlights.push({note,frames,delay,duration});
     note.style.setProperty('--note-size',`${size}px`);
     note.style.setProperty('--note-edge',palettes[colorIndex].edge);
     note.style.setProperty('--note-fill',palettes[colorIndex].fill);
@@ -82,10 +87,15 @@ function playMoneyIntro() {
       pulse.style.left=`${contactX}px`;pulse.style.top=`${hitY+size*.245}px`;
       pulse.style.setProperty('--impact-delay',`${delay+duration*.20}ms`);
       layer.append(pulse);
+      const glow=document.createElement('span');glow.className='shield-hit-glow';
+      glow.style.setProperty('--impact-delay',`${delay+duration*.20}ms`);
+      layer.append(glow);
   }
   document.body.append(layer);
+  const runningNotes=noteFlights.map(({note,frames,delay,duration})=>note.animate(frames,{duration,delay,easing:'linear',fill:'both'}));
   let timer;
   const stop = () => {
+    runningNotes.forEach(animation=>animation.cancel());
     layer.remove(); clearTimeout(timer);
     if (stopMoneyIntro === stop) stopMoneyIntro = null;
     document.removeEventListener('visibilitychange', onVisibility);
@@ -117,7 +127,6 @@ const startMoneyIntro = () => {
 document.addEventListener('visibilitychange', startMoneyIntro);
 if (document.readyState === 'complete') startMoneyIntro();
 else window.addEventListener('load', startMoneyIntro, {once:true});
-const fontButton = document.querySelector('.font-toggle');
 // Collapse only the identity row on small screens; keep navigation reachable.
 const siteHeader = document.querySelector('.site-header');
 const mobileHeaderMedia = window.matchMedia('(max-width:800px), (max-width:1000px) and (hover:none) and (pointer:coarse)');
@@ -153,18 +162,41 @@ window.addEventListener('scroll', scheduleHeaderUpdate, {passive:true});
 window.addEventListener('resize', scheduleHeaderUpdate, {passive:true});
 siteHeader.addEventListener('focusout', scheduleHeaderUpdate);
 updateMobileHeader();
-function setLargeText(enabled) {
-  document.documentElement.classList.toggle('large-text', enabled);
-  fontButton.setAttribute('aria-pressed', String(enabled));
-  fontButton.title = enabled ? 'Trở về cỡ chữ thông thường' : 'Tăng cỡ chữ trên trang';
-  fontButton.setAttribute('aria-label', fontButton.title);
+document.documentElement.classList.remove('large-text');
+// All fitted sections reserve both rows of the mobile bottom dock.
+window.pa05BottomInset=()=>{
+ const nav=siteHeader.querySelector('nav'),help=document.querySelector('.mobile-help');
+ const navHeight=mobileHeaderMedia.matches?nav.getBoundingClientRect().height:0;
+ document.documentElement.style.setProperty('--mobile-nav-height',`${navHeight}px`);
+ return navHeight+(help&&getComputedStyle(help).display!=='none'?help.getBoundingClientRect().height:0);
+};
+
+// Measure the opening view without changing its height when the brand collapses.
+let homeHeaderHeight=siteHeader.getBoundingClientRect().height;
+function fitOpeningView(){
+  if(!siteHeader.classList.contains('is-compact'))homeHeaderHeight=siteHeader.getBoundingClientRect().height;
+  const help=document.querySelector('.mobile-help');
+  document.documentElement.style.setProperty('--home-header-height',`${homeHeaderHeight}px`);
+  document.documentElement.style.setProperty('--home-help-height',`${window.pa05BottomInset()}px`);
 }
-try { setLargeText(localStorage.getItem('pa05-large-text') === 'true'); } catch (_) {}
-fontButton.addEventListener('click', () => {
-  const enabled = !document.documentElement.classList.contains('large-text');
-  setLargeText(enabled);
-  try { localStorage.setItem('pa05-large-text', String(enabled)); } catch (_) {}
-});
+const homeSizeObserver=new ResizeObserver(fitOpeningView);
+homeSizeObserver.observe(siteHeader);homeSizeObserver.observe(siteHeader.querySelector('nav'));const homeHelp=document.querySelector('.mobile-help');if(homeHelp)homeSizeObserver.observe(homeHelp);
+window.addEventListener('resize',fitOpeningView,{passive:true});fitOpeningView();
+let coverFitFrame=0;
+function fitHomeCover(){
+ cancelAnimationFrame(coverFitFrame);coverFitFrame=requestAnimationFrame(()=>{
+  if(!mobileHeaderMedia.matches)return;
+  const grid=document.querySelector('.hero-grid'),title=grid.querySelector('h1'),intro=grid.querySelector('.hero-intro'),cover=grid.querySelector('.book-cover');
+  const gap=parseFloat(getComputedStyle(grid).rowGap),landscape=innerWidth>600&&innerHeight<=520;
+  const available=landscape?grid.clientHeight:grid.clientHeight-title.getBoundingClientRect().height-intro.getBoundingClientRect().height-2*gap;
+  const columnWidth=landscape?grid.clientWidth/2.6:grid.clientWidth;
+  const imageWidth=Math.max(40,Math.min(columnWidth-8,(available-8)*480/681));
+  cover.style.setProperty('--home-book-width',`${imageWidth+8}px`);
+  cover.style.setProperty('--home-book-height',`${imageWidth*681/480+8}px`);
+ });
+}
+const coverSizeObserver=new ResizeObserver(fitHomeCover);coverSizeObserver.observe(document.querySelector('.hero-grid'));coverSizeObserver.observe(document.querySelector('.hero h1'));coverSizeObserver.observe(document.querySelector('.hero-intro'));document.fonts.ready.then(fitHomeCover);fitHomeCover();
+
 const cards = Array.from(document.querySelectorAll('.poster-card'));
 const search = document.getElementById('poster-search');
 const filters = Array.from(document.querySelectorAll('[data-filter]'));

@@ -64,10 +64,6 @@
     if(location.hash==='#kiem-tra'&&(performance.now()<alignmentUntil||Math.abs(oldTop-headerHeight)<60))align();
   }
   function scheduleFit(){cancelAnimationFrame(frame);frame=requestAnimationFrame(fit);}
-  document.querySelector('.font-toggle').addEventListener('click',()=>{
-    const rect=section.getBoundingClientRect();
-    if(isDesktop()&&rect.top<innerHeight&&rect.bottom>header.getBoundingClientRect().bottom)alignmentUntil=performance.now()+1000;
-  },true);
   form.addEventListener('checkupdated',event=>{
     tips=event.detail.tips;brief=event.detail.brief;compact=event.detail.compact;
     fullMessage=event.detail.message;

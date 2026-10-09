@@ -159,11 +159,9 @@
   new ResizeObserver(scheduleFit).observe(dialog.firstElementChild);
   new MutationObserver(scheduleFit).observe(document.documentElement,{attributes:true,attributeFilter:['class']});
   document.fonts.ready.then(scheduleFit);
-  function reflectFont(){document.getElementById('mobile-check-font').setAttribute('aria-pressed',String(document.documentElement.classList.contains('large-text')));}
-  document.getElementById('mobile-check-font').addEventListener('click',()=>{document.querySelector('.font-toggle').click();reflectFont();});
   function openMobile(source){
     if(!mobileMedia.matches||dialog.open)return;
-    opener=source||document.getElementById('open-mobile-check');reflectFont();
+    opener=source||document.getElementById('open-mobile-check');
     document.body.classList.add('mobile-checker-open');document.documentElement.classList.add('mobile-checker-open');
     dialog.showModal();
     fitMobileContent();scheduleFit();
