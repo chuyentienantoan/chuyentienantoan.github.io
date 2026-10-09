@@ -102,7 +102,14 @@
     const level=!chosen.length?'unknown':score>=60?'high':score>=15?'elevated':'caution';
     const [title,message]=levels[level];
     inputs.forEach(input=>input.closest('.check-choice').classList.toggle('is-selected',input.checked));
-    document.getElementById('check-result').dataset.level=level;
+    const result=document.getElementById('check-result');
+    result.dataset.level=level;
+    result.classList.toggle('has-risk',score>0);
+    const pulseStrength=score/100;
+    result.style.setProperty('--risk-pulse-peak',pulseStrength.toFixed(3));
+    result.style.setProperty('--risk-pulse-floor',(pulseStrength*.16).toFixed(3));
+    result.style.setProperty('--risk-pulse-duration',`${2400-1400*pulseStrength}ms`);
+    result.style.setProperty('--risk-pulse-glow',`${4+12*pulseStrength}px`);
     document.getElementById('risk-score').textContent=String(score);
     document.getElementById('risk-meter-fill').style.width=`${score}%`;
     const meter=document.getElementById('risk-meter');

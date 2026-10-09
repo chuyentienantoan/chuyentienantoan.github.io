@@ -6,14 +6,15 @@
 .shield-aura{position:absolute;left:var(--shield-x);top:var(--shield-y);width:calc(var(--shield-size) * 2.1);aspect-ratio:1;border-radius:50%;background:radial-gradient(ellipse,#f5fbf4b8 0%,#dff0e960 35%,transparent 70%);transform:translate(-50%,-50%);animation:shield-presence 3s ease both}
 .shield-stage{position:absolute;left:var(--shield-x);top:var(--shield-y);width:var(--shield-size);height:calc(var(--shield-size) * 1.2);transform:translate(-50%,-50%);perspective:650px;z-index:1;animation:shield-presence 3s ease both}
 .shield-solid{position:relative;width:100%;height:100%;transform-style:preserve-3d;transform:rotateY(-32deg) rotateX(7deg) rotateZ(-5deg);animation:shield-brace 3s ease-out both;will-change:transform}
-.shield-depth{position:absolute;inset:0;clip-path:polygon(50% 4%,90% 15%,88% 54%,79% 73%,65% 88%,50% 95%,35% 88%,21% 73%,12% 54%,10% 15%);background:linear-gradient(110deg,#0a2d38,#6d8276 45%,#947b49 66%,#0b3a45);backface-visibility:hidden}
+.shield-depth{position:absolute;inset:0;clip-path:polygon(50% 4%,91% 19%,91% 47%,85% 66%,71% 83%,50% 96%,29% 83%,15% 66%,9% 47%,9% 19%);background:linear-gradient(110deg,#0a2d38,#6d8276 45%,#947b49 66%,#0b3a45);backface-visibility:hidden}
 .depth-back{transform:translate3d(7px,3px,-16px)}
 .depth-middle{transform:translate3d(4px,2px,-10px)}
 .depth-edge{transform:translate3d(1px,1px,-4px)}
-.shield-face{display:block;width:100%;height:100%;transform:translateZ(2px);filter:drop-shadow(8px 15px 10px #123d4840)}
-.money-note{position:absolute;left:0;top:0;width:var(--note-size,80px);aspect-ratio:160/78;opacity:0;z-index:2;animation:money-deflect var(--flight-duration) linear var(--flight-delay) both;will-change:transform,opacity;perspective:400px}
+.shield-face{overflow:visible;display:block;width:100%;height:100%;transform:translateZ(2px);filter:drop-shadow(8px 15px 10px #123d4840)}
+.money-arrow{position:absolute;left:0;top:0;z-index:2;animation:money-arrow-flight var(--flight-duration) linear var(--flight-delay) both;will-change:transform}
+.money-note{position:absolute;left:0;top:0;width:var(--note-size,80px);aspect-ratio:160/78;opacity:0;z-index:2;animation:money-deflect var(--flight-duration) linear var(--flight-delay) both,money-recoil-x var(--flight-duration) linear var(--flight-delay) both;will-change:transform,translate,opacity;perspective:400px}
 .money-bill{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transform-origin:50% 50%;animation:paper-deflect var(--flight-duration) linear var(--flight-delay) both}
-.money-bill::before{content:attr(data-value);position:absolute;inset:1px;display:flex;align-items:center;justify-content:center;border:2px solid var(--note-edge);border-radius:5px;background:repeating-linear-gradient(35deg,transparent 0 5px,#ffffff28 5px 6px),var(--note-fill);color:var(--note-ink);font:800 calc(var(--note-size) * .14)/1.2 "PA05 Noto Sans",Arial,sans-serif;transform:translate3d(2px,3px,-3px) rotateY(180deg);box-shadow:0 4px 7px #123d4830}
+.money-bill::before{content:attr(data-value);position:absolute;inset:1px;display:flex;align-items:center;justify-content:center;border:2px solid var(--note-edge);border-radius:5px;background:repeating-linear-gradient(35deg,transparent 0 5px,#ffffff28 5px 6px),var(--note-fill);color:var(--note-ink);font:800 calc(var(--note-size) * .14)/1.2 "PA05 Noto Sans",Arial,sans-serif;transform:translate3d(2px,3px,-3px) rotateY(180deg)}
 .money-bill::after{content:"";position:absolute;inset:2px;border-radius:4px;background:linear-gradient(135deg,#ffffff80,transparent 36%,transparent 72%,#ffffff30);transform:translateZ(3px)}
 .money-paper{display:block;width:100%;height:100%;transform:translateZ(2px);transform-origin:50% 50%;transform-box:border-box;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .money-country{font-family:"PA05 Noto Sans",Arial,sans-serif;font-size:8.5px;font-weight:750}
@@ -23,30 +24,36 @@
 .shield-impact{position:absolute;width:56px;aspect-ratio:1;z-index:3;opacity:0;transform:translate(-50%,-50%);animation:shield-impact .38s ease-out var(--impact-delay) both;will-change:transform,opacity}
 .shield-impact::before{content:"";position:absolute;inset:7px;border:2px solid #ffdda2;border-radius:50%;box-shadow:0 0 10px #fff2b896,inset 0 0 9px #fff2b860}
 .shield-impact::after{content:"";position:absolute;inset:0;background:linear-gradient(#fff2bf,#fff2bf) center/2px 100% no-repeat,linear-gradient(90deg,#fff2bf,#fff2bf) center/100% 2px no-repeat;transform:rotate(28deg);opacity:.8;clip-path:polygon(45% 0,55% 0,55% 40%,100% 45%,100% 55%,60% 55%,55% 100%,45% 100%,40% 55%,0 55%,0 45%,45% 40%)}
+/* The approach covers 12%, 52%, then 100% of the distance:
+   velocity rises sharply over a 314ms flight, followed by a separate fall. */
+/* Separate axes avoid a stop at the turn into the fall:
+   horizontal recoil continues while vertical velocity reaches its apex. */
+@keyframes money-recoil-x{
+  0%,20%{translate:var(--x3) 0}
+  100%{translate:var(--x6) 0}
+}
 @keyframes money-deflect{
-  0%{opacity:0;transform:translate3d(var(--x0),var(--y0),0) rotate(var(--r0)) scale(.86)}
-  8%{opacity:.97}
-  22%{opacity:.97;transform:translate3d(var(--x1),var(--y1),0) rotate(var(--r1)) scale(.95)}
-  40%{transform:translate3d(var(--x2),var(--y2),0) rotate(var(--r2)) scale(1)}
-  48%{opacity:.97;transform:translate3d(var(--x3),var(--y3),0) rotate(var(--r3)) scale(1)}
-  54%{transform:translate3d(var(--x4),var(--y4),0) rotate(var(--r4)) scale(.97)}
-  70%{transform:translate3d(var(--x5),var(--y5),0) rotate(var(--r5)) scale(.94)}
-  90%{opacity:.94}
-  100%{opacity:0;transform:translate3d(var(--x6),var(--y6),0) rotate(var(--r6)) scale(.86)}
+  0%{opacity:0;transform:translate3d(0,var(--y3),0) rotate(var(--r3))}
+  3%{opacity:.97}
+  20%{opacity:.97;transform:translate3d(0,var(--y3),0) rotate(var(--r3));animation-timing-function:cubic-bezier(.333333,.666667,.666667,1)}
+  26%{transform:translate3d(0,var(--y4),0) rotate(var(--r3));animation-timing-function:cubic-bezier(.333333,0,.666667,.333333)}
+  100%{opacity:0;transform:translate3d(0,var(--y6),0) rotate(var(--r3))}
+}
+@keyframes money-arrow-flight{
+  0%{transform:translate3d(var(--arrow-x0),var(--arrow-y0),0)}
+  9%{transform:translate3d(var(--arrow-x1),var(--arrow-y1),0)}
+  16%{transform:translate3d(var(--arrow-x2),var(--arrow-y2),0)}
+  20%,100%{transform:translate3d(var(--arrow-x3),var(--arrow-y3),0)}
 }
 @keyframes paper-deflect{
-  0%{transform:rotateY(var(--paper-turn)) rotateX(14deg)}
-  40%{transform:rotateY(calc(var(--paper-turn) * -.45)) rotateX(-8deg)}
-  48%{transform:rotateY(-15deg) rotateX(6deg)}
-  54%{transform:rotateY(42deg) rotateX(26deg)}
-  72%{transform:rotateY(118deg) rotateX(-23deg)}
-  100%{transform:rotateY(240deg) rotateX(48deg)}
+  0%,20%{transform:rotateY(var(--paper-turn)) rotateX(7deg) rotateZ(0deg)}
+  100%{transform:rotateY(240deg) rotateX(48deg) rotateZ(245deg)}
 }
 @keyframes shield-presence{0%{opacity:0}10%,83%{opacity:1}100%{opacity:0}}
 @keyframes shield-brace{
   0%{transform:rotateY(-42deg) rotateX(7deg) rotateZ(-5deg) scale(.88)}
-  12%,28%,39%,53%,72%{transform:rotateY(-32deg) rotateX(7deg) rotateZ(-5deg) scale(1)}
-  31%,43%,57%{transform:translate3d(5px,0,0) rotateY(-27deg) rotateX(7deg) rotateZ(-3deg) scale(1)}
+  12%,19%,31%,43%,55%,76%{transform:rotateY(-32deg) rotateX(7deg) rotateZ(-5deg) scale(1)}
+  21%,33%,45%,57%{transform:translate3d(5px,0,0) rotateY(-27deg) rotateX(7deg) rotateZ(-3deg) scale(1)}
   100%{transform:rotateY(-32deg) rotateX(7deg) rotateZ(-5deg) scale(.98)}
 }
 @keyframes shield-impact{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}15%{opacity:.95}100%{opacity:0;transform:translate(-50%,-50%) scale(1.35)}}

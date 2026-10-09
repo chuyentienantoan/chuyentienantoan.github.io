@@ -12,10 +12,10 @@ function playMoneyIntro() {
   const width = window.innerWidth, height = window.innerHeight;
   if (height <= 0) return;
   const mobile = window.matchMedia('(max-width:600px), (hover:none) and (pointer:coarse)').matches;
-  const shieldSize = Math.min(mobile ? 168 : 246, width * (mobile ? .38 : .19), height * .36);
-  const shieldX = width * .69;
+  const shieldSize = Math.min(mobile ? 220 : 340, width * (mobile ? .50 : .25), height * .45);
+  const shieldX = Math.min(width * .69, width - shieldSize * .60 - 16);
   const shieldY = Math.max(shieldSize * .65 + 40, height * .46);
-  const impactX = shieldX - shieldSize * .20;
+  const impactX = shieldX - shieldSize * .03;
   const layer = document.createElement('div');
   layer.className = 'intro-money intro-shield'; layer.setAttribute('aria-hidden', 'true');
   layer.style.setProperty('--intro-height', `${height}px`);
@@ -28,50 +28,60 @@ function playMoneyIntro() {
     {fill:'#b1dce3',ink:'#1c6277',edge:'#628f9b',value:'500.000 ₫'}
   ];
   const symbols = palettes.map((color,index) => `<symbol id="intro-dong-${index}" viewBox="0 0 160 78"><rect x="2" y="2" width="156" height="74" rx="5" fill="${color.fill}" stroke="${color.ink}" stroke-width="1.5"/><rect x="7" y="7" width="146" height="64" rx="3" fill="none" stroke="${color.ink}" stroke-opacity=".45"/><path d="M12 17h78M12 21h60M12 63h82M12 67h69" stroke="${color.ink}" stroke-opacity=".3"/><ellipse cx="123" cy="39" rx="24" ry="27" fill="none" stroke="${color.ink}" stroke-opacity=".28"/><ellipse cx="123" cy="39" rx="19" ry="22" fill="none" stroke="${color.ink}" stroke-opacity=".2"/><text x="14" y="34" class="money-country" fill="${color.ink}">VIỆT NAM ĐỒNG</text><text x="13" y="54" class="money-value" fill="${color.ink}">${color.value}</text><text x="123" y="49" class="money-mark" fill="${color.ink}" text-anchor="middle">₫</text><text x="15" y="65" class="money-model" fill="${color.ink}">MÔ PHỎNG</text></symbol>`).join('');
-  layer.innerHTML = `<svg class="intro-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs>${symbols}</defs></svg><span class="shield-aura"></span><div class="shield-stage"><div class="shield-solid"><span class="shield-depth depth-back"></span><span class="shield-depth depth-middle"></span><span class="shield-depth depth-edge"></span><svg class="shield-face" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="intro-shield-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2bc"/><stop offset=".42" stop-color="#c8a85c"/><stop offset=".7" stop-color="#fff1bd"/><stop offset="1" stop-color="#8f713b"/></linearGradient><linearGradient id="intro-shield-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#348886"/><stop offset=".42" stop-color="#14665d"/><stop offset="1" stop-color="#123d48"/></linearGradient></defs><path d="M50 5 L90 18 Q91 81 50 113 Q9 81 10 18Z" fill="url(#intro-shield-rim)"/><path d="M50 11 L84 23 Q83 77 50 105 Q17 77 16 23Z" fill="url(#intro-shield-face)"/><path d="M50 16 L78 26 Q77 74 50 99 Q23 74 22 26Z" fill="none" stroke="#afe3d2" stroke-opacity=".38"/><path d="M50 13 L18 24 Q19 76 50 104Z" fill="#fff" opacity=".075"/><rect x="32" y="49" width="36" height="31" rx="7" fill="#e8f7eb"/><path d="M40 49v-9a10 10 0 0 1 20 0v9" fill="none" stroke="#e8f7eb" stroke-width="5"/><path d="M41 64l6 6 12-13" fill="none" stroke="#14665d" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M26 27L48 18" stroke="#fff8d7" stroke-width="2" stroke-linecap="round" opacity=".65"/></svg></div></div>`;
+  layer.innerHTML = `<svg class="intro-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs>${symbols}</defs></svg><span class="shield-aura"></span><div class="shield-stage"><div class="shield-solid"><span class="shield-depth depth-back"></span><span class="shield-depth depth-middle"></span><span class="shield-depth depth-edge"></span><svg class="shield-face" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><defs><linearGradient id="intro-shield-rim" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#fff2bc"/><stop offset=".42" stop-color="#c8a85c"/><stop offset=".7" stop-color="#fff1bd"/><stop offset="1" stop-color="#8f713b"/></linearGradient><linearGradient id="intro-shield-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#348886"/><stop offset=".42" stop-color="#14665d"/><stop offset="1" stop-color="#123d48"/></linearGradient></defs><g class="shield-brand-mark" transform="translate(-12 -4) scale(1.78)"><path d="M52 15h8V9M56 25h10M16 15H9V9" fill="none" stroke="#80C9B7" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="60" cy="7" r="4" fill="#D5B46B"/><circle cx="66" cy="25" r="3.5" fill="#80C9B7"/><circle cx="9" cy="7" r="3.5" fill="#80C9B7"/><path d="M35 5 58 15v19c0 16-10 26-23 33C22 60 12 50 12 34V15L35 5Z" fill="url(#intro-shield-face)" stroke="url(#intro-shield-rim)" stroke-width="1.4"/><path d="M35 11 52 19v15c0 12-7 20-17 27-10-7-17-15-17-27V19l17-8Z" fill="none" stroke="#80C9B7" stroke-width="1.8"/><path d="M35 7 14 16v18c0 14 9 24 21 31Z" fill="#fff" opacity=".07"/><rect class="shield-brand-card" x="21" y="24" width="31" height="24" rx="4" fill="#F5FAF7"/><path d="M21 31h31" stroke="#123D48" stroke-width="4"/><rect x="25" y="37" width="8" height="6" rx="1.5" fill="#D5B46B"/><path d="M37 40h7" stroke="#14665D" stroke-width="2.3" stroke-linecap="round"/><circle cx="49" cy="48" r="12" fill="#14665D" stroke="#F5FAF7" stroke-width="2.5"/><path class="shield-brand-check" d="m43.5 48 3.5 3.5 7-8" fill="none" stroke="#FFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div></div>`;
   let seed = 705;
   const random = () => { seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; };
-  const count = mobile ? 24 : 42;
-  for (let index = 0; index < count; index++) {
-    const wave = index % 3, colorIndex = Math.floor(index / 3) % 3;
-    const size = (mobile ? 57 : 83) + random() * (mobile ? 23 : 29);
-    const duration = 1570 + random() * 150;
-    const delay = 100 + wave * 370 + random() * 160;
-    const hitY = shieldY + (random() - .5) * shieldSize * .44 - size * .245;
-    const hitX = impactX - size * .90;
-    const startY = shieldY - shieldSize * .25 + (random() - .5) * shieldSize * .50;
-    const rotation = (random() - .5) * 26;
+  const lanes = [-.38,-.13,.13,.38];
+  for (let arrowIndex = 0; arrowIndex < 4; arrowIndex++) {
+    const size = mobile ? Math.min(44,width*.13) : 66;
+    const step = size*.68, rise = size*.44;
+    const duration = 1570, delay = 280+arrowIndex*360;
+    const contactX=impactX+[-.025,.015,-.015,.025][arrowIndex]*shieldSize;
+    const hitY = shieldY+lanes[arrowIndex]*shieldSize*.16-size*.245;
+    const hitX = contactX-size*.9;
+    const startY = shieldY+lanes[arrowIndex]*shieldSize-size*.245;
+    const arrow=document.createElement('div');arrow.className='money-arrow';
+    arrow.dataset.arrow=String(arrowIndex+1);
+    const startX=-size-25, travel=hitX-startX;
+    const flight=[[startX,startY],[startX+travel*.12,startY-shieldSize*.14],[startX+travel*.52,hitY-shieldSize*.06],[hitX,hitY]];
+    flight.forEach(([x,y],point)=>{arrow.style.setProperty(`--arrow-x${point}`,`${Math.round(x)}px`);arrow.style.setProperty(`--arrow-y${point}`,`${Math.round(y)}px`);});
+    arrow.style.setProperty('--flight-delay',`${delay}ms`);arrow.style.setProperty('--flight-duration',`${duration}ms`);
+    // The shaft and two diagonal wings form a rigid right-pointing arrow.
+    const slots=[[0,0,0],[-1,0,0],[-2,0,0],[-3,0,0],[-4,0,0],[-1,-1,34],[-2,-2,34],[-1,1,-34],[-2,2,-34]];
+    if(!mobile)slots.push([-5,0,0]);
+    slots.forEach(([column,row,rotation],index)=>{
+    const colorIndex=(arrowIndex+index)%3;
+    const localX=column*step,localY=row*rise;
     const note = document.createElement('span'); note.className = 'money-note';
+    note.dataset.slot=`${column},${row}`;
     note.innerHTML = `<span class="money-bill" data-value="${palettes[colorIndex].value}"><svg class="money-paper" viewBox="0 0 160 78" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false"><use href="#intro-dong-${colorIndex}"/></svg></span>`;
     const points = [
-      [-size-50,startY,rotation-14],
-      [hitX*.30,startY-shieldSize*.22,rotation-8],
-      [hitX*.72,hitY-shieldSize*.13,rotation+3],
-      [hitX,hitY,rotation],
-      [hitX-size*.36,hitY-12,rotation+28],
-      [hitX-size*.74,hitY+shieldSize*.55,rotation+94],
-      [hitX-size*1.05,height+size,rotation+245]
+      [localX,localY,rotation],
+      [localX,localY,rotation],
+      [localX,localY,rotation],
+      [localX,localY,rotation],
+      [localX-size*(.3+random()*.25),localY-12,rotation+28],
+      [localX-size*(.65+random()*.5),localY+shieldSize*.55+random()*35,rotation+94],
+      [localX-size*(.9+random()*.8),height+size-hitY,rotation+245]
     ];
     points.forEach(([x,y,r],step)=>{
       note.style.setProperty(`--x${step}`,`${Math.round(x)}px`);
       note.style.setProperty(`--y${step}`,`${Math.round(y)}px`);
       note.style.setProperty(`--r${step}`,`${r}deg`);
     });
-    note.style.setProperty('--flight-delay',`${delay}ms`);
-    note.style.setProperty('--flight-duration',`${duration}ms`);
     note.style.setProperty('--note-size',`${size}px`);
     note.style.setProperty('--note-edge',palettes[colorIndex].edge);
     note.style.setProperty('--note-fill',palettes[colorIndex].fill);
     note.style.setProperty('--note-ink',palettes[colorIndex].ink);
-    note.style.setProperty('--paper-turn',`${(index%2?1:-1)*(24+random()*16)}deg`);
-    layer.append(note);
-    // Three localized impact pulses, timed to actual notes reaching the face.
-    if (index < 3) {
+    note.style.setProperty('--paper-turn',`${(index%2?1:-1)*12}deg`);
+    arrow.append(note);
+    });
+    layer.append(arrow);
+    // Each arrow hits as one group; its notes scatter only after contact.
       const pulse = document.createElement('span');pulse.className='shield-impact';
-      pulse.style.left=`${impactX}px`;pulse.style.top=`${hitY+size*.245}px`;
-      pulse.style.setProperty('--impact-delay',`${delay+duration*.48}ms`);
+      pulse.style.left=`${contactX}px`;pulse.style.top=`${hitY+size*.245}px`;
+      pulse.style.setProperty('--impact-delay',`${delay+duration*.20}ms`);
       layer.append(pulse);
-    }
   }
   document.body.append(layer);
   let timer;
