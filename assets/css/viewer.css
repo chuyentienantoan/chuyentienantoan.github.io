@@ -58,3 +58,8 @@
   .viewer .button{font-size:.72rem}
   .viewer .viewer-toolbar{gap:5px;padding-inline:6px}
 }
+
+/* Keep background geometry stable and expose recoverable image failures. */
+html.modal-open{scrollbar-gutter:stable}
+.viewer .viewer-content.page-error::after{bottom:70px}
+.viewer-retry{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:2;min-height:44px;padding:8px 16px}

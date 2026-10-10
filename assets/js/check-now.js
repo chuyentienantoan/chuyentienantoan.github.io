@@ -182,7 +182,7 @@
     document.getElementById('can-ho-tro').scrollIntoView({behavior:'instant'});
     const heading=document.getElementById('help-heading');heading.tabIndex=-1;heading.focus({preventScroll:true});
   });
-  window.addEventListener('popstate',()=>{if(dialog.open&&location.hash!=='#kiem-tra')dialog.close();});
+  window.addEventListener('popstate',()=>{if(location.hash==='#kiem-tra'&&mobileMedia.matches){document.getElementById('kiem-tra').scrollIntoView({behavior:'instant'});openMobile();}else if(dialog.open)dialog.close();});
   const onMedia=()=>{if(!mobileMedia.matches&&dialog.open)dialog.close();};
   if(typeof mobileMedia.addEventListener==='function')mobileMedia.addEventListener('change',onMedia);else mobileMedia.addListener(onMedia);
   const start=()=>{if(location.hash==='#kiem-tra')requestAnimationFrame(()=>requestAnimationFrame(()=>openMobile()));};

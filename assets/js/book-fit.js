@@ -2,7 +2,7 @@
  const section=document.getElementById('cam-nang'),header=document.querySelector('.site-header'),help=document.querySelector('.mobile-help'),chapters=[...section.querySelectorAll('.chapter')];
  const dialog=document.createElement('dialog');dialog.className='book-reader';dialog.id='book-reader';dialog.setAttribute('aria-labelledby','book-reader-title');dialog.innerHTML='<div class="book-reader-header"><h2 id="book-reader-title"></h2><button type="button" aria-label="Đóng nội dung chủ đề">Đóng ×</button></div><div class="book-reader-content"></div>';document.body.append(dialog);
  const content=dialog.querySelector('.book-reader-content');let originalParent=null,moved=null,opener=null;
- function open(node,parent,title,trigger){originalParent=parent;moved=node;opener=trigger;dialog.querySelector('h2').textContent=title;content.append(node);content.scrollTop=0;document.documentElement.classList.add('book-reading');dialog.showModal();document.body.classList.add('book-reading');}
+ function open(node,parent,title,trigger){originalParent=parent;moved=node;opener=trigger;dialog.querySelector('h2').textContent=title;node.querySelectorAll('[data-view]').forEach(link=>link._viewerReturnFocus=trigger);content.append(node);content.scrollTop=0;document.documentElement.classList.add('book-reading');dialog.showModal();document.body.classList.add('book-reading');}
  dialog.querySelector('button').addEventListener('click',()=>dialog.close());
  dialog.addEventListener('close',()=>{if(moved)originalParent.append(moved);document.body.classList.remove('book-reading');document.documentElement.classList.remove('book-reading');opener?.focus({preventScroll:true});moved=null;});
  // Related posters already use the existing viewer; keep their handlers intact.

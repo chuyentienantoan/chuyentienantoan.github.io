@@ -233,37 +233,68 @@ let currentGroup = 'posters', currentIndex = 0, opener = null;
 let isTurning = false, turnToken = 0, pageAnimation = null, pageLoadTimer = null, swipeStart = null;
 let neighborTimer = null;
 const viewerImageCache = new Map();
-function loadViewerImage(src) {
-  if (viewerImageCache.has(src)) {
-    const cached = viewerImageCache.get(src);
-    viewerImageCache.delete(src); viewerImageCache.set(src,cached);
-    return cached;
+const cacheMemoryLimit = matchMedia('(hover:none) and (pointer:coarse)').matches ? 48*1024*1024 : 80*1024*1024;
+function trimViewerCache() {
+  let bytes=[...viewerImageCache.values()].reduce((sum,entry)=>sum+entry.bytes,0);
+  for(const [src,entry] of viewerImageCache) {
+    if(viewerImageCache.size<=3 && bytes<=cacheMemoryLimit) break;
+    if(!entry.ready) continue;
+    bytes-=entry.bytes;viewerImageCache.delete(src);
   }
-  const asset = new Image();
-  const request = new Promise((resolve,reject) => {
-    asset.onload = resolve; asset.onerror = () => reject(new Error('image-load')); asset.src = src;
-  }).then(async () => {
-    if (typeof asset.decode === 'function') await asset.decode();
-    return asset;
+}
+function loadViewerImage(src,priority='high') {
+  const cached=viewerImageCache.get(src);
+  if(cached){viewerImageCache.delete(src);viewerImageCache.set(src,cached);if(priority==='high')cached.asset.fetchPriority='high';return cached.promise;}
+  const asset=new Image();asset.decoding='async';asset.fetchPriority=priority;
+  const entry={asset,bytes:0,ready:false,promise:null};
+  entry.promise=new Promise((resolve,reject)=>{
+    const timeout=setTimeout(()=>{asset.onload=asset.onerror=null;asset.removeAttribute('src');reject(new Error('image-timeout'));},20000);
+    asset.onload=()=>{clearTimeout(timeout);resolve();};
+    asset.onerror=()=>{clearTimeout(timeout);reject(new Error('image-load'));};asset.src=src;
+  }).then(async()=>{
+    if(typeof asset.decode==='function')await asset.decode();
+    entry.bytes=asset.naturalWidth*asset.naturalHeight*4;entry.ready=true;trimViewerCache();return asset;
   });
-  viewerImageCache.set(src,request);
-  while (viewerImageCache.size > 3) viewerImageCache.delete(viewerImageCache.keys().next().value);
-  request.catch(() => { if (viewerImageCache.get(src) === request) viewerImageCache.delete(src); });
-  return request;
+  viewerImageCache.set(src,entry);
+  entry.promise.catch(()=>{if(viewerImageCache.get(src)===entry)viewerImageCache.delete(src);});
+  return entry.promise;
 }
-function queueNextPage() {
+function canPrefetchImages(){const c=navigator.connection;return !c || (!c.saveData&&!['slow-2g','2g','3g'].includes(c.effectiveType));}
+function queueNextPage(){
   clearTimeout(neighborTimer);
-  const connection = navigator.connection;
-  if (!dialog.open || isTurning || !image.complete || !image.naturalWidth) return;
-  if (connection && (connection.saveData || ['slow-2g','2g'].includes(connection.effectiveType))) return;
-  const item = media[currentGroup][currentIndex+1];
-  if (!item) return;
-  const token = turnToken;
-  neighborTimer = setTimeout(() => {
-    if (dialog.open && !isTurning && token === turnToken) loadViewerImage(item.image).catch(() => {});
-  }, 300);
+  if(!dialog.open||isTurning||!image.complete||!image.naturalWidth||!canPrefetchImages())return;
+  const item=media[currentGroup][currentIndex+1];if(!item)return;const token=turnToken;
+  neighborTimer=setTimeout(()=>{if(dialog.open&&!isTurning&&token===turnToken)loadViewerImage(item.image,'low').catch(()=>{});},250);
 }
-image.addEventListener('load', queueNextPage);
+image.addEventListener('load',queueNextPage);
+// Warm only the first relevant image as its section approaches the viewport.
+if('IntersectionObserver' in window){
+  const warmObserver=new IntersectionObserver(entries=>{
+    for(const entry of entries){if(!entry.isIntersecting)continue;warmObserver.unobserve(entry.target);
+      setTimeout(()=>{if(!canPrefetchImages()||document.visibilityState!=='visible')return;
+        const warm=()=>{if(!dialog.open&&canPrefetchImages())loadViewerImage(media[entry.target.id==='cam-nang'?'book':'posters'][0].image,'low').catch(()=>{});};
+        if('requestIdleCallback' in window)requestIdleCallback(warm,{timeout:1500});else warm();
+      },500);
+    }
+  },{rootMargin:'180px 0px'});
+  ['cam-nang','ap-phich'].forEach(id=>warmObserver.observe(document.getElementById(id)));
+}
+document.querySelectorAll('[data-view]').forEach(link=>{
+  const warm=()=>{if(canPrefetchImages()){const item=media[link.dataset.view]?.[Number(link.dataset.index)];if(item)loadViewerImage(item.image,'low').catch(()=>{});}};
+  link.addEventListener('pointerenter',warm,{passive:true});link.addEventListener('focus',warm);link.addEventListener('pointerdown',warm,{passive:true});
+});
+let failedPageTarget=null;
+const retryImage=document.createElement('button');retryImage.type='button';retryImage.className='viewer-retry button primary';retryImage.textContent='Thử tải lại';retryImage.hidden=true;imageContainer.append(retryImage);
+function showPageError(target){failedPageTarget=target;retryImage.hidden=false;imageContainer.classList.add('page-error');setViewerHint('Chưa tải được trang. Chọn Thử tải lại hoặc kiểm tra kết nối mạng.');}
+retryImage.addEventListener('click',()=>{const target=failedPageTarget;if(target===null)return;target===currentIndex?loadCurrentPage():changePage(target-currentIndex);});
+async function loadCurrentPage(){
+  const token=++turnToken;isTurning=true;updatePageButtons();retryImage.hidden=true;failedPageTarget=null;
+  imageContainer.classList.remove('page-error');imageContainer.setAttribute('aria-busy','true');
+  pageLoadTimer=setTimeout(()=>{if(token===turnToken)imageContainer.classList.add('is-loading');},180);
+  try{const asset=await loadViewerImage(media[currentGroup][currentIndex].image);if(token!==turnToken||!dialog.open)return;image.src=asset.src;setViewerHint(normalViewerHint);}
+  catch(_){if(token===turnToken&&dialog.open)showPageError(currentIndex);}
+  finally{if(token===turnToken){clearTimeout(pageLoadTimer);imageContainer.classList.remove('is-loading');imageContainer.removeAttribute('aria-busy');isTurning=false;updatePageButtons();queueNextPage();}}
+}
 const pageMotionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 const normalViewerHint = 'Vuốt trái để xem trang sau, vuốt phải để xem trang trước. Chọn “Phóng to” để đọc chi tiết.';
 function setViewerHint(message) {
@@ -276,7 +307,7 @@ function updatePageButtons() {
   zoom.disabled = isTurning;
 }
 function cancelPageTurn() {
-  turnToken++; isTurning = false; swipeStart = null;
+  turnToken++; isTurning = false; swipeStart = null;retryImage.hidden=true;failedPageTarget=null;
   if (pageAnimation) pageAnimation.cancel();
   pageAnimation = null; clearTimeout(pageLoadTimer);
   clearTimeout(neighborTimer);
@@ -297,7 +328,7 @@ async function changePage(direction) {
   const token = ++turnToken;
   const focusedControl = document.activeElement;
   const restoreControlFocus = [previous,next,zoom].includes(focusedControl);
-  isTurning = true; swipeStart = null; updatePageButtons();
+  isTurning = true; swipeStart = null;retryImage.hidden=true;failedPageTarget=null; updatePageButtons();
   imageContainer.setAttribute('aria-busy', 'true'); imageContainer.classList.remove('page-error');
   pageLoadTimer = setTimeout(() => { if (token === turnToken) imageContainer.classList.add('is-loading'); }, 180);
   try {
@@ -319,8 +350,7 @@ async function changePage(direction) {
     ], direction > 0 ? 'right center' : 'left center');
   } catch (_) {
     if (token === turnToken && dialog.open) {
-      imageContainer.classList.add('page-error');
-      setViewerHint('Chưa tải được trang. Hãy thử chuyển trang lại.');
+      showPageError(target);
     }
   } finally {
     if (token === turnToken) {
@@ -334,7 +364,7 @@ async function changePage(direction) {
     }
   }
 }
-function renderImage() {
+function renderImage(assignImage=true) {
   const list = media[currentGroup];
   const item = list[currentIndex];
   const title = item.title;
@@ -342,7 +372,7 @@ function renderImage() {
   document.getElementById('viewer-title').title = title;
   document.getElementById('viewer-count').textContent = `${currentGroup === 'book' ? 'Cẩm nang · Trang' : `Áp phích số ${item.id} ·`} ${currentIndex + 1} / ${list.length}`;
   dialog.style.setProperty('--page-progress', `${(currentIndex+1)/list.length*100}%`);
-  image.src = item.image;
+  if(assignImage)image.src = item.image;
   image.alt = item.title;
   const download = document.getElementById('download-image');
   download.href = item.download;
@@ -358,13 +388,13 @@ document.querySelectorAll('[data-view]').forEach(link => link.addEventListener('
   if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || typeof dialog.showModal !== 'function') return;
   event.preventDefault();
   cancelPageTurn();
-  currentGroup = link.dataset.view; currentIndex = Number(link.dataset.index); opener = link;
-  renderImage(); dialog.showModal(); document.body.classList.add('modal-open');
-  queueNextPage();
+  currentGroup = link.dataset.view; currentIndex = Number(link.dataset.index); opener = link._viewerReturnFocus || link;
+  image.removeAttribute('src');renderImage(false);document.documentElement.classList.add('modal-open');document.body.classList.add('modal-open');dialog.showModal();
+  loadCurrentPage();
   document.getElementById('close-viewer').focus();
 }));
 document.getElementById('close-viewer').addEventListener('click', () => dialog.close());
-dialog.addEventListener('close', () => { cancelPageTurn(); document.body.classList.remove('modal-open'); if (opener && opener.isConnected) opener.focus({preventScroll:true}); });
+dialog.addEventListener('close', () => { cancelPageTurn(); document.body.classList.remove('modal-open');document.documentElement.classList.remove('modal-open'); if (opener && opener.isConnected) opener.focus({preventScroll:true}); });
 previous.addEventListener('click', () => changePage(-1));
 next.addEventListener('click', () => changePage(1));
 zoom.addEventListener('click', () => {

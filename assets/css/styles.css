@@ -1,5 +1,5 @@
 /* Vietnamese font is bundled with the website; no font service required. */
-@font-face{font-family:"PA05 Noto Sans";src:url("../fonts/noto-sans-variable.ttf") format("truetype");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"PA05 Noto Sans";src:url("../fonts/noto-sans-vietnamese.woff2") format("woff2");font-style:normal;font-weight:100 900;font-display:swap}
 :root{color-scheme:light;--ink:#173942;--muted:#4e636b;--teal:#14665d;--navy:#123d48;--paper:#fff;--soft:#f3f7f5;--line:#d8e3df;--radius:20px;font-size:18px}
 :root.large-text{font-size:22px}
 *{box-sizing:border-box}
