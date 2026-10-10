@@ -67,3 +67,5 @@ body.book-reading{overflow:hidden}
 html:not(.js) #cam-nang{height:auto;display:block}
 html:not(.js) #cam-nang .chapters{display:block}
 html:not(.js) #cam-nang .chapter{margin-block:8px}
+/* Reserve the existing scrollbar space only while a handbook topic is open. */
+html.book-reading{scrollbar-gutter:stable}
